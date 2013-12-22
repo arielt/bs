@@ -2,3 +2,15 @@
 
 puts "hello world"
 
+puts "Usage: bs [ OPTIONS ] OBJECT { COMMAND | help }"
+
+puts "bs task verify"
+
+puts "bs repo init"
+puts "bs repo add"
+puts "bs repo list"
+puts "bs repo delete"
+
+puts "bs sandbox init"
+
+
