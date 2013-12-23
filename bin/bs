@@ -2,9 +2,10 @@
 
 require 'yaml'
 require 'bs'
-#require 'bs/node'
 
 cli_struct = {
+  'make'  => 'BS::Config.make',
+  'clean' => 'BS::Config.clean',
   'task' => {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
@@ -16,13 +17,16 @@ cli_struct = {
   },
   "sandbox"  => {
     'make'   => 'make_sandbox',
-    'del'    => 'del_sandbox',
+    'clean'  => 'clean_sandbox',
     'status' => 'dump_sandbox'
   }
 }
 
 def print_usage
   puts 'Usage:'
+  puts '  bs make'
+  puts '  bs clean'
+  puts ''
   puts '  bs task list'
   puts '  bs task add [git URL]'
   puts '  bs task del [task name]'
@@ -43,7 +47,7 @@ def make_sandbox
   node.create
 end
 
-def del_sandbox
+def clean_sandbox
    Node::Local.new.destroy
 end
 
