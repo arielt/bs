@@ -7,6 +7,8 @@ require 'pp'
 require './lib/bs'
 require './lib/bs/task'
 require './lib/bs/config'
+require './lib/bs/node'
+require './lib/bs/node/local'
 
 cli_struct = {
   'task' => {
@@ -52,7 +54,7 @@ def del_sandbox
 end
 
 def dump_sandbox
-   Node::Local.new.is_sane?
+   Bs::Node::Local.new.is_sane?
 end
 
 def parse_arguments struct
@@ -73,6 +75,8 @@ def parse_arguments struct
     quit_on_wrong_input
   end
 end
+
+dump_sandbox
 
 if ARGV.empty?
   # TODO: interactive CLI

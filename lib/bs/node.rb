@@ -1,3 +1,4 @@
+module Bs
 module Node
 
     CONF_FILE_NAME  = "node.yml"
@@ -36,4 +37,4 @@ module Node
     autoload :Local,     'node/local'
 
 end
-
+end
