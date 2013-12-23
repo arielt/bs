@@ -1,14 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'yaml'
-require 'pp'
-
-#TODO: normalize gem paths
-require './lib/bs'
-require './lib/bs/task'
-require './lib/bs/config'
-require './lib/bs/node'
-require './lib/bs/node/local'
+require 'bs'
 
 cli_struct = {
   'task' => {
@@ -54,7 +47,7 @@ def del_sandbox
 end
 
 def dump_sandbox
-   Bs::Node::Local.new.is_sane?
+   BS::Node::Local.new.is_sane?
 end
 
 def parse_arguments struct

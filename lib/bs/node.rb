@@ -1,4 +1,4 @@
-module Bs
+module BS
 module Node
 
     CONF_FILE_NAME  = "node.yml"

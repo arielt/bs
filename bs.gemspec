@@ -9,25 +9,10 @@ Gem::Specification.new do |s|
   s.email         = ["tubaltzev@gmail.com"]
   s.homepage      = "https://github.com/arielt/bs"
   s.summary       = "Binary Score Core Gem"
-  s.description   = "Controller execution of programming tasks"
+  s.description   = "Controlled execution of programming tasks"
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "bs"
-
-  s.add_dependency "childprocess", "~> 0.3.7"
-  s.add_dependency "erubis", "~> 2.7.0"
-  s.add_dependency "i18n", "~> 0.6.0"
-  s.add_dependency "log4r", "~> 1.1.9"
-  s.add_dependency "net-ssh", ">= 2.6.6", "< 2.8.0"
-  s.add_dependency "net-scp", "~> 1.1.0"
-
-  s.add_development_dependency "rake"
-  s.add_development_dependency "contest", ">= 0.1.2"
-  s.add_development_dependency "minitest", "~> 2.5.1"
-  s.add_development_dependency "mocha"
-  # This has problems on Windows, we need to find a better way:
-  # s.add_development_dependency "sys-proctable", "~> 0.9.0"
-  s.add_development_dependency "rspec", "~> 2.14.0"
 
   # The following block of code determines the files that should be included
   # in the gem. It does this by reading all the files in the directory where

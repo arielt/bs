@@ -1,4 +1,4 @@
-module Bs
+module BS
   module Task
     def self.list(params)
       puts "Task list:"
