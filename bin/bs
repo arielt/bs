@@ -19,8 +19,9 @@ cli_struct = {
     "list"    => 'Bs::Subsysytem.list'
   },
   "sandbox"  => {
-    "init"   => 'Bs::Sandbox.make',
-    "status" => 'Bs::Sandbox.status'
+    'make'   => 'make_sandbox',
+    'del'    => 'del_sandbox',
+    'status' => 'dump_sandbox'
   }
 }
 
@@ -29,11 +30,29 @@ def print_usage
   puts '  bs task list'
   puts '  bs task add [git URL]'
   puts '  bs task del [task name]'
+  puts ''
+  puts '  bs sandbox status'
+  puts '  bs sandbox make'
+  puts '  bs sandbox del'
 end
 
 def quit_on_wrong_input
   print_usage
   exit(1)
+end
+
+def make_sandbox
+  node = Node::Local.new
+  node.destroy
+  node.create
+end
+
+def del_sandbox
+   Node::Local.new.destroy
+end
+
+def dump_sandbox
+   Node::Local.new.is_sane?
 end
 
 def parse_arguments struct
