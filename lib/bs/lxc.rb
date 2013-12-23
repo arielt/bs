@@ -1,8 +1,8 @@
-require 'lxc/errors'
-require 'lxc/shell'
-require 'lxc/container'
-require 'lxc/configuration_options'
-require 'lxc/configuration'
+require 'bs/lxc/errors'
+require 'bs/lxc/shell'
+require 'bs/lxc/container'
+require 'bs/lxc/configuration_options'
+require 'bs/lxc/configuration'
 
 module LXC
   class << self

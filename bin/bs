@@ -2,16 +2,17 @@
 
 require 'yaml'
 require 'bs'
+#require 'bs/node'
 
 cli_struct = {
   'task' => {
-    'list'   => 'Bs::Task.list',
-    'add'    =>  {'.+' => 'Bs::Task.add'},
-    'del'    =>  {'.+' => 'Bs::Task.del'},
-    "verify" =>  {'*' => 'Bs::Task.verify'}
+    'list'   => 'BS::Task.list',
+    'add'    =>  {'.+' => 'BS::Task.add'},
+    'del'    =>  {'.+' => 'BS::Task.del'},
+    "verify" =>  {'*' => 'BS::Task.verify'}
   },
   "subsystem" => {
-    "list"    => 'Bs::Subsysytem.list'
+    "list"    => 'BS::Subsysytem.list'
   },
   "sandbox"  => {
     'make'   => 'make_sandbox',
@@ -46,8 +47,8 @@ def del_sandbox
    Node::Local.new.destroy
 end
 
-def dump_sandbox
-   BS::Node::Local.new.is_sane?
+def dump_sandbox(params)
+  BS::Node::Local.new.is_sane?
 end
 
 def parse_arguments struct
@@ -68,8 +69,6 @@ def parse_arguments struct
     quit_on_wrong_input
   end
 end
-
-dump_sandbox
 
 if ARGV.empty?
   # TODO: interactive CLI

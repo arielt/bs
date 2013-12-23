@@ -1,4 +1,4 @@
-module Bs
+module BS
   module Config
 
     @config = nil

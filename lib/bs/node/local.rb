@@ -1,8 +1,8 @@
-require '/bs/helpers'
-require 'lxc'
+require 'bs/helpers'
+require 'bs/lxc'
 
-module Bs
-module Node
+module BS
+  module Node
     class Local
 
         include Node
@@ -184,5 +184,5 @@ module Node
             end
         end
     end
-end
+  end
 end

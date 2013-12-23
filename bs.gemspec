@@ -3,7 +3,7 @@ require "bs/version"
 
 Gem::Specification.new do |s|
   s.name          = "bs"
-  s.version       = Bs::VERSION
+  s.version       = BS::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Ariel Tubaltsev"]
   s.email         = ["tubaltzev@gmail.com"]

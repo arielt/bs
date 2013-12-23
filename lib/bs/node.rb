@@ -1,5 +1,5 @@
 module BS
-module Node
+  module Node
 
     CONF_FILE_NAME  = "node.yml"
     CONF_FILE       = "/opt/bs/conf/node.yml"
@@ -34,7 +34,7 @@ module Node
         }
     }
 
-    autoload :Local,     'node/local'
+    autoload :Local,     'bs/node/local'
 
-end
+  end
 end
