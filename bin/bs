@@ -1,16 +1,64 @@
 #!/usr/bin/env ruby
 
-puts "hello world"
+require 'yaml'
+require 'pp'
 
-puts "Usage: bs [ OPTIONS ] OBJECT { COMMAND | help }"
+#TODO: normalize gem paths
+require './lib/bs'
+require './lib/bs/task'
+require './lib/bs/config'
 
-puts "bs task verify"
+cli_struct = {
+  'task' => {
+    'list'   => 'Bs::Task.list',
+    'add'    =>  {'.+' => 'Bs::Task.add'},
+    'del'    =>  {'.+' => 'Bs::Task.del'},
+    "verify" =>  {'*' => 'Bs::Task.verify'}
+  },
+  "subsystem" => {
+    "list"    => 'Bs::Subsysytem.list'
+  },
+  "sandbox"  => {
+    "init"   => 'Bs::Sandbox.make',
+    "status" => 'Bs::Sandbox.status'
+  }
+}
 
-puts "bs repo init"
-puts "bs repo add"
-puts "bs repo list"
-puts "bs repo delete"
+def print_usage
+  puts 'Usage:'
+  puts '  bs task list'
+  puts '  bs task add [git URL]'
+  puts '  bs task del [task name]'
+end
 
-puts "bs sandbox init"
+def quit_on_wrong_input
+  print_usage
+  exit(1)
+end
 
+def parse_arguments struct
+  params = []
+  while (struct && (arg = ARGV.shift)) do
+    struct = struct[arg]
+    while (struct.is_a?(Hash) && struct.keys[0] == '.+') do
+      argv = ARGV.shift
+      quit_on_wrong_input unless /.+/.match(argv)
+      params.push(argv)
+      struct = struct['.+']
+    end
+  end
+
+  if struct 
+    eval "#{struct} params"
+  else
+    quit_on_wrong_input
+  end
+end
+
+if ARGV.empty?
+  # TODO: interactive CLI
+  print_usage
+else
+  parse_arguments cli_struct
+end
 
