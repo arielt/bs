@@ -5,7 +5,7 @@ module BS
 
     CONF_FILE = '.bs/config'
 
-    init_config = {
+    @init_config = {
       'task_path' => '.bs/tasks'
     }
 
@@ -14,16 +14,17 @@ module BS
       return @config
     end
 
-    def init
-      File.open(CONF_FILE, 'w') {|f| f.write init_config.to_yaml }
+    def self.init
+      File.open(CONF_FILE, 'w') {|f| f.write @init_config.to_yaml }
     end
 
-    def clean
-      system("./bs")
+    def self.clean(params)
+      system("rm -rf .bs")
     end
 
-    def make
-      system("mkdir -p ./bs")
+    def self.make(params)
+      system("mkdir -p .bs")
+      system("mkdir -p .bs/tasks")
       init
     end
 
