@@ -9,11 +9,10 @@ cli_struct = {
   'task' => {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
-    'del'    =>  {'.+' => 'BS::Task.del'},
-    "verify" =>  {'*' => 'BS::Task.verify'}
+    'del'    =>  {'.+' => 'BS::Task.del'}
   },
   "subsystem" => {
-    "list"    => 'BS::Subsysytem.list'
+    'list'    => 'BS::Subsysytem.list'
   },
   "sandbox"  => {
     'make'   => 'make_sandbox',
