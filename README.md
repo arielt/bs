@@ -1,13 +1,10 @@
 BS
 ==
 
-Binary Score core gem
+Binary Score Core Gem
 
-Will use .bs folder in current path
 
-.bs/bs.config
-.bs/repo
-.bs/sb
+Merging code from old sources to github, functionality is not available yet.
 
 ## License
 
