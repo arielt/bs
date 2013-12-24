@@ -1,10 +1,7 @@
 module BS
   module Node
 
-    CONF_FILE_NAME  = "node.yml"
-    CONF_FILE       = "/opt/bs/conf/node.yml"
-    TMP             = "/opt/bs/tmp"
-
+    
     #
     # we will strive to find the minimum required for small container (first type)
     # 64 Mb of memory is required to be at least decent provisioned by puppet
@@ -34,7 +31,8 @@ module BS
         }
     }
 
-    autoload :Local,     'bs/node/local'
+    #autoload :Local,       'bs/node/local'
+    autoload :Desktop,     'bs/node/desktop'
 
   end
 end

@@ -8,7 +8,11 @@ module BS
     TASK_DIR  = '.bs/tasks'
 
     @init_config = {
-      'task_path' => '.bs/tasks'
+      'task_path' => '.bs/tasks',
+      'sandbox' => {
+        'memory'     => '524288',
+        'disk_space' => '524288'
+      }
     }
 
    def self.check()

@@ -1,6 +1,10 @@
 class Hash
   def recursively_symbolize_keys!
-    self.symbolize_keys!
+
+    self.keys.each do |key|
+      self[(key.to_sym rescue key) || key] = self.delete(key)
+    end
+
     self.values.each do |v|
       if v.is_a? Hash
         v.recursively_symbolize_keys!
