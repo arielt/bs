@@ -10,20 +10,41 @@ module BS
 
       CONF_FILE = "#{BS::Config::CONF_DIR}/node.yml"
 
-      def status(params)
+      def print_status(params)
+        puts "Node:"
         puts "Host name: \t\t#{@conf[:hostname]}"
-        puts "Available memory: \t#{@conf[:mem]}"
+        puts "Available memory: \t#{@conf[:mem]} Kb"
         puts "Number of CPUs: \t#{@conf[:cpu]}"
+        puts "Disk space: \t\t#{@conf[:hd]} Kb"
+        puts "\nSandbox:"
+        puts "Available memory: \t#{@conf[:sandboxes][0][:mem]} Kb"
+        puts "Number of CPUs: \t#{@conf[:sandboxes][0][:cpu]}"
+        puts "Disk space: \t\t#{@conf[:sandboxes][0][:hd]} Kb"
       end
 
       def set_sb_conf
         # resources allocated for sandbox
-        @conf[:mem_sb] = BS::Config.get['sandbox']['memory']
-        @conf[:hd_sb]  = BS::Config.get['sandbox']['disk_space']
-        @conf[:cpu_sb] = @conf[:cpu]
-
         @conf[:sandboxes] = []
-        @conf[:sandboxes].push({name: "sb0", type: "first"})
+        @conf[:sandboxes].push({
+          name: 'sb0', 
+          mem: BS::Config.get['sandbox']['memory'].to_i,
+          cpu: @conf[:cpu],
+          hd:  BS::Config.get['sandbox']['disk_space'].to_i
+        })
+      end
+
+      # create node, no dispatching
+      def create
+        @conf[:sandboxes].each do |v|
+          create_sandbox(v)
+        end
+      end
+
+      # destroy node, no dispatching
+      def destroy
+        LXC.containers.each do |v|
+          remove_container(v)
+        end
       end
 
       def initialize

@@ -1,8 +1,8 @@
-require 'bs/lxc'
 require 'socket'
 require 'mem_info'
 require 'sys/cpu'
 require 'sys/filesystem'
+require 'bs/lxc'
 require 'bs/helpers'
 
 module BS
@@ -35,7 +35,7 @@ module BS
         @conf[:cpu_sb]  = @conf[:cpu]
 
         @conf[:sandboxes] = []
-        @conf[:sandboxes].push({name: "sb0", type: "first"})
+        @conf[:sandboxes].push({name: 'sb0', type: 'first'})
       end
 
       # save configuration
@@ -136,16 +136,19 @@ module BS
       def create_sandbox(v)
         name = v[:name]
         type = v[:type]
-        template = File.read("puppet/modules/bs/templates/monit-resque.erb")
-
+       
+        # to optimize, create only first container, clone others
         if name == "sb0"
           system("sudo /usr/bin/lxc-create -n #{name} -t ubuntu -- -r oneiric")
-          set_constraints(v)
         else
           system("sudo lxc-clone -o sb0 -n #{name}")
         end
 
         set_constraints(v)
+      end
+
+      def add_dispatching(v)
+        template = File.read("puppet/modules/bs/templates/monit-resque.erb")
 
         # update monit configuration file
         file = File.open("/opt/bs/tmp/resque_worker_#{name}","w")
@@ -156,12 +159,13 @@ module BS
       end
 
       # 
-      # builds all container
-      # mounts disks
+      # build all containers
+      # start dispatching
       #
       def create
         @conf[:sandboxes].each do |v|
           create_sandbox(v)
+          add_dispatching(v)
         end
         start_monit
       end

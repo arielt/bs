@@ -17,7 +17,7 @@ cli_struct = {
   "sandbox"  => {
     'make'   => 'make_sandbox',
     'clean'  => 'clean_sandbox',
-    'status' => 'BS::Node::Desktop.new.status'
+    'status' => 'BS::Node::Desktop.new.print_status'
   }
 }
 
@@ -41,13 +41,12 @@ def quit_on_wrong_input
 end
 
 def make_sandbox(params)
-  puts BS::Node::Desktop::CONF_FILE
   node = BS::Node::Desktop.new
   node.create
 end
 
-def clean_sandbox
-   Node::Local.new.destroy
+def clean_sandbox(params)
+   BS::Node::Desktop.new.destroy
 end
 
 def parse_arguments struct
