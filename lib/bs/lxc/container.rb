@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module LXC
   class Container
     attr_accessor :name
@@ -9,12 +11,13 @@ module LXC
     # @param [String] name container name
     # @return [LXC::Container] container instance
     def initialize(name)
+      puts "hello"
       @name = name
-      if self.exists?
-        @conf_file_name = "/var/lib/lxc/#{@name}/config"
-        @tmp_file_name = "/opt/bs/tmp/#{@name}_config"
-        @conf = Configuration.load_file(@conf_file_name)
-      end
+      @conf_file_name = "/var/lib/lxc/#{@name}/config"
+      @tmp_file_name = "/opt/bs/tmp/#{@name}_config"
+      @conf = Configuration.load_file(@conf_file_name)
+      puts "this is my configuration".red
+      pp @conf
     end
 
     # Get container attributes hash
@@ -248,12 +251,13 @@ module LXC
       raise "Failed to create sandbox folder" unless system("sudo mkdir -p #{sandbox}")
       raise "Failed to mount HD" unless system("sudo mount -o loop #{hd_file} #{sandbox}")
 
-      raise "Failed to change owner for sandbox" unless system("sudo chown #{SANDBOX_UID} #{sandbox}")
-      raise "Failed to change group for sandbox" unless system("sudo chgrp #{SANDBOX_UID} #{sandbox}")
+      # TODO: support root user
+      raise "Failed to change owner for sandbox" unless system("sudo chown #{ENV['SUDO_USER']} #{sandbox}")
+      #raise "Failed to change group for sandbox" unless system("sudo chgrp #{SANDBOX_UID} #{sandbox}")
 
       raise "Failed to create verification folder" unless system("sudo mkdir -p #{verification}")
-      raise "Failed to change owner for verification" unless system("sudo chown #{SANDBOX_UID} #{verification}")
-      raise "Failed to change group for verification" unless system("sudo chgrp #{BS_UID} #{verification}")
+      raise "Failed to change owner for verification" unless system("sudo chown #{ENV['SUDO_USER']} #{verification}")
+      #raise "Failed to change group for verification" unless system("sudo chgrp #{BS_UID} #{verification}")
       raise "Failed to chmod for verification" unless system("sudo chmod 771 #{verification}")
     end
 

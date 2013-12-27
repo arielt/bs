@@ -1,5 +1,6 @@
 require 'bs/lxc'
 require 'bs/node/local'
+require 'pp'
 
 # Desktop computational node
 # No monitoring support, single container
@@ -21,6 +22,20 @@ module BS
         puts "Number of CPUs: \t#{@conf[:sandboxes][0][:cpu]}"
         puts "Disk space: \t\t#{@conf[:sandboxes][0][:hd]} Kb"
       end
+
+      def set_constraints(sandbox)
+	puts "BS: setting constraints".green
+        #lxc = LXC.container(sandbox[:name])
+        #lxc.sb_mem_limit = sandbox[:mem]        
+        #lxc.sb_mem_swap_limit = sandbox[:mem] * 2                                                                                                                                            
+        ##lxc.sb_cpu_share = [:cpu_share]                                                                                                                                            
+        #lxc.sb_destroy_hd                                                                                                                                                               
+        #lxc.sb_create_hd(sandbox[:hd])                                                                                                                                                    
+        #lxc.enable_network                                                                                                                                                              
+        configure(sandbox[:name])                                                                                                                                                       
+        #lxc.disable_network                                                                                                                                                             
+        puts "BS: Done with constraints".green
+      end         
 
       def set_sb_conf
         # resources allocated for sandbox

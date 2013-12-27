@@ -5,10 +5,10 @@ module BS
 
     @config = nil
 
-    CONF_DIR  = "/opt/bs"
-    CONF_FILE = "#{CONF_DIR}/files/bs.yml"
-    TASK_DIR  = "#{CONF_DIR}/tasks"
-    TMP_DIR   = "#{CONF_DIR}/tmp"
+    CONF_DIR  = "/opt/bs/config"
+    CONF_FILE = "/opt/bs/files/bs.yml"
+    TASK_DIR  = "/opt/bs/tasks"
+    TMP_DIR   = "/opt/tmp"
 
     def self.get
       @config = YAML::load_file(CONF_FILE) unless @config

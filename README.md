@@ -1,7 +1,7 @@
 BS
 ==
 
-Binary Score Core Gem
+Binary Score Core
 
 
 Merging code from old sources to github, functionality is not available yet.
@@ -24,6 +24,13 @@ Prepare tasks:
 Prepare sandbox:
 
     bs sandbox ... 
+
+
+## TODO
+
+LXC config is sensitive to reordering.
+
+Config should keep the order / be templetazed
 
 ## License
 
