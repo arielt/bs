@@ -1,0 +1,4 @@
+sandbox:
+  memory: 262144
+  disk_space: 262144
+

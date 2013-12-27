@@ -1,0 +1,12 @@
+Source: bs
+Section: net
+Maintainer: Ariel Tubaltsev <tubaltzev@gmail.com>
+Build-Depends: 
+Priority: extra
+Standards-Version: 1.0.0
+
+Package: bs
+Architecture: all
+Depends: lxc, puppet
+Description: Binary Score Core
+
