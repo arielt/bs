@@ -34,7 +34,7 @@ module BS
         #lxc.enable_network                                                                                                                                                              
         configure(sandbox[:name])                                                                                                                                                       
         #lxc.disable_network                                                                                                                                                             
-        puts "BS: Done with constraints".green
+        puts "BS: done with constraints".green
       end         
 
       def set_sb_conf

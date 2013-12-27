@@ -131,10 +131,11 @@ module BS
         sleep(60)
       end
 
-      def create_sandbox(v)
-        name = v[:name]
-        type = v[:type]
-       
+      def create_sandbox(sb)
+        name = sb[:name]
+        type = sb[:type]
+      
+        puts "BS: creating sandbox".green
         # to optimize, create only first container, clone others
         if name == "sb0"
           system("sudo /usr/bin/lxc-create -n #{name} -t ubuntu -- -r oneiric")
@@ -144,7 +145,7 @@ module BS
           puts "BS: sandbox cloned".green
         end
 
-        set_constraints(v)
+        set_constraints(sb)
       end
 
       def add_dispatching(v)
