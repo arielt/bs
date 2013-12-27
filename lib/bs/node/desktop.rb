@@ -1,4 +1,5 @@
 require 'bs/lxc'
+require 'bs/lxc/container'
 require 'bs/node/local'
 require 'pp'
 
@@ -24,16 +25,18 @@ module BS
       end
 
       def set_constraints(sandbox)
-	puts "BS: setting constraints".green
-        #lxc = LXC.container(sandbox[:name])
-        #lxc.sb_mem_limit = sandbox[:mem]        
-        #lxc.sb_mem_swap_limit = sandbox[:mem] * 2                                                                                                                                            
-        ##lxc.sb_cpu_share = [:cpu_share]                                                                                                                                            
-        #lxc.sb_destroy_hd                                                                                                                                                               
-        #lxc.sb_create_hd(sandbox[:hd])                                                                                                                                                    
-        #lxc.enable_network                                                                                                                                                              
-        configure(sandbox[:name])                                                                                                                                                       
-        #lxc.disable_network                                                                                                                                                             
+        puts "BS: setting constraints".green
+        lxc = BS::LXC::Container.new(sandbox[:name])
+        lxc.set_knob(:mem,  "#{sandbox[:mem]}K")
+        lxc.set_knob(:swap, "#{sandbox[:mem]*2}K")
+        lxc.destroy_hd
+        lxc.create_hd(sandbox[:hd])
+        lxc.enable_network
+        lxc.save
+        configure(sandbox[:name])
+        puts "BS: disabling network".green
+        lxc.disable_network
+        lxc.save
         puts "BS: done with constraints".green
       end         
 
@@ -57,8 +60,8 @@ module BS
 
       # destroy node, no dispatching
       def destroy
-        LXC.containers.each do |v|
-          remove_container(v)
+        @conf[:sandboxes].each do |v|
+          destroy_sandbox(v)
         end
       end
 

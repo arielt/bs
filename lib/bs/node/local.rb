@@ -148,6 +148,12 @@ module BS
         set_constraints(sb)
       end
 
+      def destroy_sandbox(sb)
+        lxc = BS::LXC::Container.new(sb[:name])
+        lxc.destroy_hd
+        system("sudo /usr/bin/lxc-destroy -n #{sb[:name]}")
+      end
+
       def add_dispatching(v)
         template = File.read("puppet/modules/bs/templates/monit-resque.erb")
 
