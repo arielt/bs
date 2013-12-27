@@ -14,9 +14,13 @@ module BS
 
       def print_status
         puts "\nSandbox:"
-        puts "Memory limit: \t\t#{@conf[:sandboxes][0][:mem]} Kb"
-        puts "Swap limit: \t\t#{@conf[:sandboxes][0][:mem]*2} Kb"
-        puts "Disk space limit: \t#{@conf[:sandboxes][0][:hd]} Kb"
+        if File.exists?(CONF_FILE)
+          puts "Memory limit: \t\t#{@conf[:sandboxes][0][:mem]} Kb"
+          puts "Swap limit: \t\t#{@conf[:sandboxes][0][:mem]*2} Kb"
+          puts "Disk space limit: \t#{@conf[:sandboxes][0][:hd]} Kb"
+        else
+          puts "Not created. You may want to run \'sudo bs make\' to fix that".red
+        end
       end
 
       def set_constraints(sandbox)
