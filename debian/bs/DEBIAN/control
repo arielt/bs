@@ -1,9 +1,0 @@
-Package: bs
-Version: 1.0.0
-Architecture: all
-Maintainer: Ariel Tubaltsev <tubaltzev@gmail.com>
-Installed-Size: 131
-Depends: lxc, puppet
-Section: net
-Priority: extra
-Description: Binary Score Core

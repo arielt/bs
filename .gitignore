@@ -1,2 +1,4 @@
 .bs
+debian/bs
+debian/tmp
 

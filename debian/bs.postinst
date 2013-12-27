@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "This installation was initiated by user:"
+echo $SUDO_USER
+echo "This installation was performed by user:"
+whoami
+
+# TODO: make tasks folder available per user
+chmod 777 /opt/bs/tasks
+
+exit 0

@@ -8,24 +8,23 @@ Merging code from old sources to github, functionality is not available yet.
 
 ## Quick Start
 
-Check out on Ubuntu machine, build and install BS package
+Check out on Ubuntu machine, build and install BS package:
 
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb
     
-Get Ubuntu machine
+Check status:
 
-LXC is required:
+    bs status
+    
+Prepare tasks:
 
-    apt-get install lxc
-  
-Prepare the environment:
-
-    bs make
-
+    bs task ....
+    
 Prepare sandbox:
 
-    sudo env PATH=$PATH GEM_HOME=$GEM_HOME bs sandbox make
+    bs sandbox ... 
+
 ## License
 
 BS is released under the MIT License. http://www.opensource.org/licenses/mit-license
