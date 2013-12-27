@@ -1,7 +1,3 @@
-require 'socket'
-require 'mem_info'
-require 'sys/cpu'
-require 'sys/filesystem'
 require 'bs/lxc'
 require 'bs/helpers'
 
@@ -14,17 +10,17 @@ module BS
       attr_accessor :unused_hd
 
       def set_node_conf
-        @conf[:hostname] = Socket.gethostname
+        #@conf[:hostname] = Socket.gethostname
 
         # memory in Kb
-        m = MemInfo.new
-        @conf[:mem] = m.memtotal
+        #m = MemInfo.new
+        #@conf[:mem] = m.memtotal
 
-        @conf[:cpu] = Sys::CPU.processors.count
+        #@conf[:cpu] = Sys::CPU.processors.count
 
         # Disk space in Kb
-        stat = Sys::Filesystem.stat("/")
-        @conf[:hd] =  stat.block_size * stat.blocks_available / 1024
+        #stat = Sys::Filesystem.stat("/")
+        #@conf[:hd] =  stat.block_size * stat.blocks_available / 1024
       end
 
       # create basic configuration if there is no existing one
@@ -35,7 +31,7 @@ module BS
         @conf[:cpu_sb]  = @conf[:cpu]
 
         @conf[:sandboxes] = []
-        @conf[:sandboxes].push({name: 'sb0', type: 'first'})
+        @conf[:sandboxes].push({:name => 'sb0', :type => 'first'})
       end
 
       # save configuration

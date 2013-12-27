@@ -5,6 +5,8 @@ echo "This installation was performed by user:"
 whoami
 
 # TODO: make tasks folder available per user
-chmod 777 /opt/bs/tasks
+#chmod 777 /opt/bs/tasks
+chown $SUDO_USER /opt/bs/tasks
+chown $SUDO_USER /opt/bs/config
 
 exit 0

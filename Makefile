@@ -18,4 +18,5 @@ install:
 	cp -r files $(INST_OPT_DIR)/
 
 	mkdir -p $(INST_OPT_DIR)/tasks
+	mkdir -p $(INST_OPT_DIR)/config
 

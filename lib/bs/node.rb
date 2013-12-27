@@ -11,23 +11,23 @@ module BS
 
     # all units are kilobytes
     TYPES = {
-        first: {
-            mem:        262144,
-            swap:       524288,
-            cpu_share:  1024,
-            hd:         16384 
+        :first => {
+            :mem =>        262144,
+            :swap =>       524288,
+            :cpu_share =>  1024,
+            :hd =>         16384 
         },
-        second: {
-            mem:        262144,
-            swap:       524288,
-            cpu_share:  2048,
-            hd:         65536 
+        :second => {
+            :mem =>        262144,
+            :swap =>       524288,
+            :cpu_share =>  2048,
+            :hd =>         65536 
         },
-        third: {
-            mem:        262144,
-            swap:       524288,
-            cpu_share:  4096,
-            hd:         524288
+        :third => {
+            :mem =>        262144,
+            :swap =>       524288,
+            :cpu_share =>  4096,
+            :hd =>         524288
         }
     }
 

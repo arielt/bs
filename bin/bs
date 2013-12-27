@@ -39,12 +39,12 @@ def quit_on_wrong_input
   exit(1)
 end
 
-def make_sandbox(params)
+def make_sandbox
   node = BS::Node::Desktop.new
   node.create
 end
 
-def clean_sandbox(params)
+def clean_sandbox
    BS::Node::Desktop.new.destroy
 end
 

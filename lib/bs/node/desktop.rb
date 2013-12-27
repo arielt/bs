@@ -26,10 +26,10 @@ module BS
         # resources allocated for sandbox
         @conf[:sandboxes] = []
         @conf[:sandboxes].push({
-          name: 'sb0', 
-          mem: BS::Config.get['sandbox']['memory'].to_i,
-          cpu: @conf[:cpu],
-          hd:  BS::Config.get['sandbox']['disk_space'].to_i
+          :name => 'sb0', 
+          :mem  => BS::Config.get['sandbox']['memory'].to_i,
+          :cpu =>  @conf[:cpu],
+          :hd =>   BS::Config.get['sandbox']['disk_space'].to_i
         })
       end
 
