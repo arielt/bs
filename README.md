@@ -33,11 +33,19 @@ To rebuild the environment and sandbox, use:
     sudo bs clean
     sudo bs make
 
-## TODO
+## Advanced
 
-LXC config is sensitive to reordering.
+To change sandbox resources, edit
+    /opt/bs/config/bs.yml
 
-Config should keep the order / be templetazed
+Parameters:
+    memory: in Kilobytes
+    disk_space: in Kilobytes
+
+Rebuild sandbox:
+
+    sudo bs clean
+    sudo bs make
 
 ## License
 
