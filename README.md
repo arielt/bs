@@ -12,19 +12,26 @@ Check out on Ubuntu machine, build and install BS package:
 
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb
-    
-Check status:
+   
 
-    bs status
-    
+Prepare sandbox:
+
+    sudo bs make
+        
 Prepare tasks:
 
     bs task ....
     
-Prepare sandbox:
+Check status:
 
-    bs sandbox ... 
+    bs status
 
+## Troubleshooting
+
+To rebuild the environment and sandbox, use:
+
+    sudo bs clean
+    sudo bs make
 
 ## TODO
 

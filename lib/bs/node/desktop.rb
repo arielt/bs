@@ -12,16 +12,11 @@ module BS
 
       CONF_FILE = "#{BS::Config::CONF_DIR}/node.yml"
 
-      def print_status(params)
-        puts "Node:"
-        puts "Host name: \t\t#{@conf[:hostname]}"
-        puts "Available memory: \t#{@conf[:mem]} Kb"
-        puts "Number of CPUs: \t#{@conf[:cpu]}"
-        puts "Disk space: \t\t#{@conf[:hd]} Kb"
+      def print_status
         puts "\nSandbox:"
-        puts "Available memory: \t#{@conf[:sandboxes][0][:mem]} Kb"
-        puts "Number of CPUs: \t#{@conf[:sandboxes][0][:cpu]}"
-        puts "Disk space: \t\t#{@conf[:sandboxes][0][:hd]} Kb"
+        puts "Memory limit: \t\t#{@conf[:sandboxes][0][:mem]} Kb"
+        puts "Swap limit: \t\t#{@conf[:sandboxes][0][:mem]*2} Kb"
+        puts "Disk space limit: \t#{@conf[:sandboxes][0][:hd]} Kb"
       end
 
       def set_constraints(sandbox)
@@ -56,6 +51,7 @@ module BS
         @conf[:sandboxes].each do |v|
           create_sandbox(v)
         end
+        save_conf CONF_FILE
       end
 
       # destroy node, no dispatching
@@ -63,13 +59,13 @@ module BS
         @conf[:sandboxes].each do |v|
           destroy_sandbox(v)
         end
+        system("rm #{CONF_FILE}")
       end
 
       def initialize
         init_conf CONF_FILE
         set_node_conf
         set_sb_conf
-        save_conf CONF_FILE
       end
 
     end

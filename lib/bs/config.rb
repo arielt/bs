@@ -6,7 +6,7 @@ module BS
     @config = nil
 
     CONF_DIR  = "/opt/bs/config"
-    CONF_FILE = "/opt/bs/files/bs.yml"
+    CONF_FILE = "#{CONF_DIR}/bs.yml"
     TASK_DIR  = "/opt/bs/tasks"
     TMP_DIR   = "/opt/tmp"
 

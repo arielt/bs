@@ -175,6 +175,7 @@ module BS
           add_dispatching(v)
         end
         start_monit
+        save_conf CONF_FILE
       end
 
       def destroy
@@ -210,7 +211,6 @@ module BS
         init_conf CONF_FILE
         set_node_conf
         set_sb_conf
-        save_conf CONF_FILE
       end
 
     end

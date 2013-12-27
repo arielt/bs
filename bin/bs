@@ -5,8 +5,8 @@ require 'bs'
 
 cli_struct = {
   'status' => 'status',
-  'make'   => 'make_sandbox',
-  'clean'  => 'clean_sandbox',
+  'make'   => 'make',
+  'clean'  => 'clean',
   'task' => {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
@@ -16,12 +16,6 @@ cli_struct = {
     'list'    => 'BS::Subsysytem.list'
   }
 }
-
-def status
-  puts "Binary Score status"
-  BS::Node::Desktop.new.print_status
-  BS::Task.list
-end
 
 def print_usage
   puts 'Usage:'
@@ -39,12 +33,19 @@ def quit_on_wrong_input
   exit(1)
 end
 
-def make_sandbox
+def status
+  puts "Binary Score status"
+  BS::Node::Desktop.new.print_status
+  puts ''
+  BS::Task.list
+end
+
+def make
   node = BS::Node::Desktop.new
   node.create
 end
 
-def clean_sandbox
+def clean
    BS::Node::Desktop.new.destroy
 end
 
