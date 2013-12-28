@@ -1,8 +1,11 @@
 BS
 ==
 
-Binary Score Core
+Binary Score allows you to execute code verification in sandbox environment. 
 
+Currently supported languages:
+
+C++
 
 Merging code from old sources to github, functionality is not available yet.
 
