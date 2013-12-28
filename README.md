@@ -3,9 +3,15 @@ BS
 
 Binary Score allows you to execute code verification in sandbox environment. 
 
+Executed code will be limited by:
+
+ * Memory / Swap
+ * Disk Space
+ * Time
+ 
 Currently supported languages:
 
-C++
+* C++
 
 Merging code from old sources to github, functionality is not available yet.
 
