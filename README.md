@@ -11,7 +11,7 @@ Executed code will be limited by:
  
 Currently supported languages:
 
-* C++
+ * C++
 
 Merging code from old sources to github, functionality is not available yet.
 
@@ -19,40 +19,33 @@ Merging code from old sources to github, functionality is not available yet.
 
 Check out on Ubuntu machine, build and install BS package:
 
-    git clone [BS URL]
+    git clone <BS URL>
     cd bs
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb
 
 Prepare sandbox:
 
-    sudo bs make
+    bs make
         
-You will need to create task repository. Example of such task:
+Add task to task repository:
 
     bs task add git@github.com:arielt/cpp_hello_world.git
-    bs task list
-    bs task del cpp_hello_world
     
 Check status:
 
     bs status
 
-To run verification process, you will need to specify the task and solution file.
-Example of verification using solution supplied along with sample task:
+Run verification process, using sample file provided with the task:
 
-
-    sudo bs task verify cpp_hello_world /opt/bs/tasks/cpp_hello_world/solutions/simple.cpp
-
-Solution is not necessary the part of the task.
-
+    bs task verify cpp_hello_world /opt/bs/tasks/cpp_hello_world/solutions/simple.cpp
 
 ## Troubleshooting
 
 To rebuild the environment and sandbox, use:
 
-    sudo bs clean
-    sudo bs make
+    bs clean
+    bs make
 
 ## Advanced
 
@@ -67,8 +60,8 @@ Parameters:
 
 Rebuild sandbox:
 
-    sudo bs clean
-    sudo bs make
+    bs clean
+    bs make
 
 
 ## TODO

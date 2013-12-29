@@ -25,9 +25,9 @@ def print_usage
   puts '  bs clean'
   puts ''
   puts '  bs task list'
-  puts '  bs task add [git URL]'
-  puts '  bs task del [task name]'
-  puts '  bs task verify [task name] [solution file]'
+  puts '  bs task add <git URL>'
+  puts '  bs task del <task name>'
+  puts '  bs task verify <task name> <solution file>'
 end
 
 def quit_on_wrong_input
