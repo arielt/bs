@@ -19,5 +19,6 @@ install:
 
 	mkdir -p $(INST_OPT_DIR)/tasks
 	mkdir -p $(INST_OPT_DIR)/config
+	mkdir -p $(INST_OPT_DIR)/log
 	mv $(INST_OPT_DIR)/files/bs.yml $(INST_OPT_DIR)/config
 

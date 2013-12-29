@@ -1,7 +1,6 @@
 require 'bs/lxc'
 require 'bs/lxc/container'
 require 'bs/node/local'
-require 'pp'
 
 # Desktop computational node
 # No monitoring support, single container

@@ -3,4 +3,5 @@ opt/bs/lib/
 opt/bs/files/
 opt/bs/tasks/
 opt/bs/config/
+/opt/bs/log/
 

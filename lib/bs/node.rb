@@ -31,7 +31,6 @@ module BS
         }
     }
 
-    #autoload :Local,       'bs/node/local'
     autoload :Desktop,     'bs/node/desktop'
 
   end

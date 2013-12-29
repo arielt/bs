@@ -10,7 +10,8 @@ cli_struct = {
   'task' => {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
-    'del'    =>  {'.+' => 'BS::Task.del'}
+    'del'    =>  {'.+' => 'BS::Task.del'},
+    'verify' =>  {'.+' => {'.+' => 'BS::Task.verify'}}
   },
   "subsystem" => {
     'list'    => 'BS::Subsysytem.list'
@@ -26,6 +27,7 @@ def print_usage
   puts '  bs task list'
   puts '  bs task add [git URL]'
   puts '  bs task del [task name]'
+  puts '  bs task verify [task name] [solution file]'
 end
 
 def quit_on_wrong_input
