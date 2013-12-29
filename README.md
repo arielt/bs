@@ -20,7 +20,9 @@ Prepare sandbox:
         
 Prepare tasks:
 
-    bs task ....
+    bs task add git@github.com:arielt/cpp_hello_world.git
+    bs task list
+    bs task del cpp_hello_world
     
 Check status:
 
@@ -36,9 +38,11 @@ To rebuild the environment and sandbox, use:
 ## Advanced
 
 To change sandbox resources, edit
+
     /opt/bs/config/bs.yml
 
 Parameters:
+
     memory: in Kilobytes
     disk_space: in Kilobytes
 
@@ -46,6 +50,11 @@ Rebuild sandbox:
 
     sudo bs clean
     sudo bs make
+
+
+## TODO
+
+Check if invoking user is sudoer
 
 ## License
 
