@@ -1,11 +1,7 @@
 BS
 ==
 
-Binary Score allows you to execute code verification in sandbox environment.
-
-It's available on any Ubuntu machine: bare metal, virtual on-premises or in the cloud.
-
-It protects your resources while executing not trusted code. 
+Binary Score allows you to execute code verification in sandbox environment. It's available on any Ubuntu machine: bare metal, virtual on-premises or in the cloud. Binary Score protects your resources while executing not trusted code. 
 
 Executed code will be limited by:
 
@@ -15,9 +11,7 @@ Executed code will be limited by:
  * Number of allowed forks
  * Number of opened files
  
-Currently supported languages:
-
- * C++
+Currently supported languages: C++
 
 Merging code from old sources to github, functionality is not available yet.
 
@@ -44,7 +38,7 @@ Check status:
 
 Run verification process, using sample file provided with the task:
 
-    bs task verify cpp_hello_world /opt/bs/tasks/cpp_hello_world/solutions/simple.cpp
+    bs task verify cpp_hello_world /opt/bs/tasks/cpp_hello_world/solutions/solution.cpp
 
 ## Troubleshooting
 
@@ -55,41 +49,26 @@ To rebuild the environment and sandbox, use:
 
 ## Advanced
 
-To change sandbox resources, edit
-
-    /opt/bs/config/bs.yml
-
-Parameters:
-
-    memory: in Kilobytes
-    disk_space: in Kilobytes
-
-Rebuild sandbox:
+To change sandbox resources, edit **/opt/bs/config/bs.yml** and rebuild sandbox:
 
     bs clean
     bs make
 
-Example of configuration file:
+Example of /opt/bs/config/bs.yml:
 
-sandbox:
-  memory: 262144
-  disk_space: 262144
+    sandbox:
+      memory: 262144
+      disk_space: 262144
 
-### Memory limit
+#### memory
 
-configuration knob: memory
-description: defines sandbox's memory limit in kylobites
-example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp
+> defines sandbox's memory limit in kylobites<br>
+> example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp<br>
 
-### Disk space limit
+#### disk_space
 
-configuration knob: disk_space
-description: defines sandbox's disk space limit in kylobites
-example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
-
-
- 
-
+> defines sandbox's disk space limit in kylobites
+> example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
 
 ## TODO
 
