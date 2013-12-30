@@ -11,10 +11,7 @@ cli_struct = {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
     'del'    =>  {'.+' => 'BS::Task.del'},
-    'verify' =>  {'.+' => {'.+' => 'BS::Task.verify'}}
-  },
-  "subsystem" => {
-    'list'    => 'BS::Subsysytem.list'
+    'verify' =>  {'.+' => {'.+' => 'BS::Sandbox::Desktop.verify'}}
   }
 }
 
@@ -74,8 +71,14 @@ def parse_arguments struct
   end
 end
 
+
+# entry point
+unless Process.uid == 0
+  puts "This process must run as root. You might want to use \'sudo bs ...\'".red
+  exit 1
+end
+
 if ARGV.empty?
-  # TODO: interactive CLI
   print_usage
 else
   parse_arguments cli_struct

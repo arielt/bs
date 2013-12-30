@@ -30,7 +30,7 @@ Prepare sandbox:
         
 Add task to task repository:
 
-    bs task add git@github.com:arielt/cpp_hello_world.git
+    bs task add https://github.com/arielt/cpp_hello_world.git
     
 Check status:
 
@@ -66,7 +66,10 @@ Rebuild sandbox:
 
 ## TODO
 
-Check if invoking user is sudoer
+Read timeout from configuration file
+Make task repository configurable
+Apply default policy
+Add tests
 
 ## License
 

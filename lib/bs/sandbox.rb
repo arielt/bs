@@ -1,6 +1,6 @@
-module Sandbox
-    autoload :Policy,   'sandbox/policy'
-    autoload :Core,     'sandbox/core'
-    autoload :First,    'sandbox/first'
+module BS
+  module Sandbox
+    autoload :Desktop,  'bs/sandbox/desktop'
+  end
 end
 
