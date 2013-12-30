@@ -17,6 +17,8 @@ module BS
 
     DEFAULT_TIME_LIMIT = 30
 
+    DESKTOP_SB  = "sb0"
+
     # subsystems
     C          = 0
     CPP        = 10
@@ -30,7 +32,7 @@ module BS
       JAVASCRIPT  => "jvs.rb"
     }
 
-    def self.get
+    def self.params
       @config = YAML::load_file(CONF_FILE) unless @config
       return @config
     end

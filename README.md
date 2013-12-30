@@ -71,11 +71,9 @@ nofile       | max number of open files | https://github.com/arielt/cpp_hello_wo
 
 ## TODO
 
-* Read timeout from configuration file
-* Make task repository configurable
-* Apply default policy
 * Add tests
 * remove postinstall ease of permissions
+* add web server
 
 ## License
 

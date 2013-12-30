@@ -14,12 +14,12 @@ module BS
         extend self
 
         def perform(params)
-          # TODO: define constants
-          sb_name  = 'sb0'
-          rootfs   = "/var/lib/lxc/#{sb_name}/rootfs/"
+          rootfs   = "/var/lib/lxc/#{DESKTOP_SB}/rootfs/"
           ver_path = rootfs + "#{VER_DST_DIR}/"
 
-          BS::Sandbox::Policy.new(sb_name).apply
+          task_timeout = BS::Task.params(params[0])['verification_timeout'] 
+
+          BS::Sandbox::Policy.new(DESKTOP_SB).apply
 
           FileUtils.rm_rf(ver_path + ".")
           FileUtils.rm_rf("#{LOG_DIR}/execute")
@@ -30,17 +30,17 @@ module BS
           puts "Verification started...".green
           rv = false
           begin
-            Timeout.timeout(DEFAULT_TIME_LIMIT) do
-              command = "sudo lxc-execute -n #{sb_name} -o #{LOG_DIR}/execute -l NOTICE #{VER_DST_DIR}/#{VERIFICATOR[CPP]}" 
+            Timeout.timeout(task_timeout || DEFAULT_TIME_LIMIT) do
+              command = "sudo lxc-execute -n #{DESKTOP_SB} -o #{LOG_DIR}/execute -l NOTICE #{VER_DST_DIR}/#{VERIFICATOR[CPP]}" 
               rv = system(command)
             end
             system("tail -n 25 #{ver_path}log.txt > #{ver_path}trunc_log.txt")
             message = File.read("#{ver_path}trunc_log.txt")            
           rescue Timeout::Error
             message =  "Oops... It takes too long, we can't verify this"
-            system("sudo lxc-stop -n #{sb_name} &")
+            system("sudo lxc-stop -n #{DESKTOP_SB} &")
             sleep(1)
-            init_pid = fetch_init_pid(sb_name)
+            init_pid = fetch_init_pid(DESKTOP_SB)
             system("sudo kill -9 #{init_pid}")
             puts "Killed #{init_pid}"
           end

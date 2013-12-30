@@ -7,8 +7,8 @@ module BS
       def initialize(sb_name)
         @rootfs = "/var/lib/lxc/#{sb_name}/rootfs/"
         @policy = [
-          {:type => 'hard', :item => 'nproc',  :value => BS::Config.get['sandbox']['nproc'].to_i},
-          {:type => 'hard', :item => 'nofile', :value => BS::Config.get['sandbox']['nofile'].to_i}
+          {:type => 'hard', :item => 'nproc',  :value => BS::Config.params['sandbox']['nproc'].to_i},
+          {:type => 'hard', :item => 'nofile', :value => BS::Config.params['sandbox']['nofile'].to_i}
         ]
       end
 

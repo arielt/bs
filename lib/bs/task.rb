@@ -18,6 +18,11 @@ module BS
         system("rm -rf #{BS::Config::TASK_DIR}/#{params[0]}")
       end
 
+      def params(task_name)
+        @config = YAML::load_file("#{BS::Config::TASK_DIR}/#{task_name}/task.yml")
+        return @config
+      end
+
      end
   end
 end
