@@ -64,8 +64,8 @@ Example of /opt/bs/config/bs.yml:
 
 Parameter     | Description | Example of neutralized action
 ------------- | ----------- | -----------------
-memory        | memory limit in kylobites | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp
-disk_space    | disk space limit in kylobites | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
+memory        | memory limit in kilobytes | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp
+disk_space    | disk space limit in kilobytes | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
 nproc       | max number of processes | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_fork_bomb.cpp
 nofile       | max number of open files | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_multiple_files.cpp
 
