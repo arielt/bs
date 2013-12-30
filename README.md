@@ -67,7 +67,7 @@ Example of /opt/bs/config/bs.yml:
 
 #### disk_space
 
-> defines sandbox's disk space limit in kylobites
+> defines sandbox's disk space limit in kylobites<br>
 > example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
 
 ## TODO
