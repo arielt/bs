@@ -1,63 +1,45 @@
-#
-# requirements: 
-# init with one existing policies
-#   - default
-#
-# default policy should be comprehensive
-# thresholds should be defined - hardcoded
-# default policy defines minimal threshold as well
-#
-module Sandbox
+module BS
+  module Sandbox
     class Policy
 
-        USER = "sandbox"
+      USER = "sandbox"
 
-        def initialize(sb_name, type = :default)
+      def initialize(sb_name)
+        @rootfs = "/var/lib/lxc/#{sb_name}/rootfs/"
+        @policy = [
+          {:type => 'hard', :item => 'nproc',  :value => BS::Config.get['sandbox']['nproc'].to_i},
+          {:type => 'hard', :item => 'nofile', :value => BS::Config.get['sandbox']['nofile'].to_i}
+        ]
+      end
 
-            @rootfs = "/var/lib/lxc/#{sb_name}/rootfs/"
-            default_policy = YAML.load_file("lib/lxc/fs/etc/security/default_policy.yml")          
-
-            case(type)
-
-            when :default
-                @policy = default_policy
-            # for other types, the policy should be merged with default
-            else
-                raise "Unknown policy type"
-
-            end
-
+      def conf_array
+        output = []
+        @policy.each do |v|
+          output << "#{USER}\t#{v[:type]}\t#{v[:item]}\t#{v[:value]}"
         end
+        output
+      end
 
-        def conf_array
-            output = []
-            @policy.each do |k,v|
-                v.each do |entry|
-                    str = "#{USER}\t#{entry["type"]}\t#{k}\t#{entry["value"]}"
-                    output << str
-                end
-            end
-            output
-        end
+      # enable resource control inside container
+      def enable_rc
+        system("sudo cp files/su #{@rootfs}etc/pam.d/")
+        system("echo \"session    required   pam_limits.so\" | sudo tee -a #{@rootfs}etc/pam.d/su > /dev/null")
+      end
 
-        # resource control inside container
-        def enable_rc
-            system("sudo cp lib/lxc/fs/etc/pam.d/su #{@rootfs}etc/pam.d/")
-            system("echo \"session    required   pam_limits.so\" | sudo tee -a #{@rootfs}etc/pam.d/su > /dev/null")
-        end
+      # enable resource control inside container
+      def disable_rc
+        system("sudo cp files/su #{@rootfs}etc/pam.d/")
+      end
 
-        def disable_rc
-            system("sudo cp lib/lxc/fs/etc/pam.d/su #{@rootfs}etc/pam.d/")
+      def apply
+        enable_rc
+        system("sudo cp files/limits.conf #{@rootfs}etc/security/")
+        conf_array.each do |v|
+          system("echo \"#{v}\" | sudo tee -a #{@rootfs}etc/security/limits.conf > /dev/null")
         end
-
-        def apply
-            enable_rc
-            system("sudo cp lib/lxc/fs/etc/security/limits.conf #{@rootfs}etc/security/")
-            conf_array.each do |v|
-                system("echo \"#{v}\" | sudo tee -a #{@rootfs}etc/security/limits.conf > /dev/null")
-            end
-        end
+      end
 
     end
+  end
 end
 

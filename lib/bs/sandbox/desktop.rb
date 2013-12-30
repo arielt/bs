@@ -2,6 +2,7 @@ require 'fileutils'
 require 'timeout'
 require 'bs/helpers'
 require 'bs/sandbox/core'
+require 'bs/sandbox/policy'
 
 include BS::Config
 include BS::Sandbox::Core
@@ -18,14 +19,13 @@ module BS
           rootfs   = "/var/lib/lxc/#{sb_name}/rootfs/"
           ver_path = rootfs + "#{VER_DST_DIR}/"
 
-          # TODO: port internal policy
-          # Policy.new(sb_name).apply
+          BS::Sandbox::Policy.new(sb_name).apply
 
           FileUtils.rm_rf(ver_path + ".")
           FileUtils.rm_rf("#{LOG_DIR}/execute")
           FileUtils.cp(params[1], "#{ver_path}solution.cpp")
           FileUtils.cp("#{TASK_DIR}/#{params[0]}/verification.cpp", "#{ver_path}verification.cpp")
-          FileUtils.cp("#{VER_SRC_DIR}/#{VERIFICATOR[CPP]}", ver_path)
+          FileUtils.cp("files/#{VERIFICATOR[CPP]}", ver_path)
 
           puts "Verification started...".green
           rv = false
