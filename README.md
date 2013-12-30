@@ -1,13 +1,19 @@
 BS
 ==
 
-Binary Score allows you to execute code verification in sandbox environment. 
+Binary Score allows you to execute code verification in sandbox environment.
+
+It's available on any Ubuntu machine: bare metal, virtual on-premises or in the cloud.
+
+It protects your resources while executing not trusted code. 
 
 Executed code will be limited by:
 
  * Memory / Swap
  * Disk Space
  * Time
+ * Number of allowed forks
+ * Number of opened files
  
 Currently supported languages:
 
@@ -63,13 +69,35 @@ Rebuild sandbox:
     bs clean
     bs make
 
+Example of configuration file:
+
+sandbox:
+  memory: 262144
+  disk_space: 262144
+
+### Memory limit
+
+configuration knob: memory
+description: defines sandbox's memory limit in kylobites
+example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp
+
+### Disk space limit
+
+configuration knob: disk_space
+description: defines sandbox's disk space limit in kylobites
+example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
+
+
+ 
+
 
 ## TODO
 
-Read timeout from configuration file
-Make task repository configurable
-Apply default policy
-Add tests
+* Read timeout from configuration file
+* Make task repository configurable
+* Apply default policy
+* Add tests
+* remove postinstall ease of permissions
 
 ## License
 

@@ -1,16 +1,18 @@
 require 'fileutils'
 require 'timeout'
 require 'bs/helpers'
+require 'bs/sandbox/core'
 
 include BS::Config
+include BS::Sandbox::Core
 
 module BS
   module Sandbox
     module Desktop
 
-      class << self
+        extend self
 
-        def verify(params)
+        def perform(params)
           # TODO: define constants
           sb_name  = 'sb0'
           rootfs   = "/var/lib/lxc/#{sb_name}/rootfs/"
@@ -52,7 +54,6 @@ module BS
           end
         end
 
-      end
 
     end
   end

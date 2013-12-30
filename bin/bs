@@ -2,6 +2,7 @@
 
 $:.unshift '/opt/bs/lib'
 require 'bs'
+require 'bs/helpers'
 
 cli_struct = {
   'status' => 'status',
@@ -11,7 +12,7 @@ cli_struct = {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
     'del'    =>  {'.+' => 'BS::Task.del'},
-    'verify' =>  {'.+' => {'.+' => 'BS::Sandbox::Desktop.verify'}}
+    'verify' =>  {'.+' => {'.+' => 'BS::Sandbox::Desktop.perform'}}
   }
 }
 
