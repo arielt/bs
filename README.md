@@ -62,16 +62,6 @@ Example of /opt/bs/config/bs.yml:
       nproc:      8
       nofile:     64
 
-#### memory
-
-> defines sandbox's memory limit in kylobites<br>
-> example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp<br>
-
-#### disk_space
-
-> defines sandbox's disk space limit in kylobites<br>
-> example of neutralized action: https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_hd_explosion.cpp
-
 Parameter     | Description | Example of neutralized action
 ------------- | ----------- | -----------------
 memory        | memory limit in kylobites | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_malloc_bomb.cpp
