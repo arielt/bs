@@ -16,8 +16,8 @@ module BS
       end  
 
       # get pid from the log file
-      def fetch_init_pid(sb_name)
-        file = File.read("/var/log/lxc/#{sb_name}.execute")
+      def fetch_init_pid(file_name, sb_name)
+        file = File.read(file_name)
         file.each_line do |line|
           return line.split("started with pid ").last.split("'")[1].to_i if line.include?("started with pid")
         end

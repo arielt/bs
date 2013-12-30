@@ -40,9 +40,8 @@ module BS
             message =  "Oops... It takes too long, we can't verify this"
             system("sudo lxc-stop -n #{DESKTOP_SB} &")
             sleep(1)
-            init_pid = fetch_init_pid(DESKTOP_SB)
-            system("sudo kill -9 #{init_pid}")
-            puts "Killed #{init_pid}"
+            init_pid = fetch_init_pid("#{LOG_DIR}/execute", DESKTOP_SB)
+            system("sudo kill -9 #{init_pid} 2> /dev/null")
           end
 
           puts message

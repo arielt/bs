@@ -8,7 +8,6 @@ module BS
       def initialize(name)
         @name = name
         @conf_file_name = "/var/lib/lxc/#{@name}/config"
-        @tmp_file_name = "/opt/bs/tmp/#{@name}_config"
         @conf = File.read(@conf_file_name)
         @lines = @conf.split("\n")
       end
@@ -49,13 +48,12 @@ module BS
         raise "Failed to create sandbox folder" unless system("sudo mkdir -p #{sandbox}")
         raise "Failed to mount HD" unless system("sudo mount -o loop #{hd_file} #{sandbox}")
 
-        # TODO: support root user
         raise "Failed to change owner for sandbox" unless system("sudo chown #{ENV['SUDO_USER']} #{sandbox}")
-        #raise "Failed to change group for sandbox" unless system("sudo chgrp #{SANDBOX_UID} #{sandbox}")
+        raise "Failed to change group for sandbox" unless system("sudo chgrp #{BS::Config::SANDBOX_UID} #{sandbox}")
 
         raise "Failed to create verification folder" unless system("sudo mkdir -p #{verification}")
         raise "Failed to change owner for verification" unless system("sudo chown #{ENV['SUDO_USER']} #{verification}")
-        #raise "Failed to change group for verification" unless system("sudo chgrp #{BS_UID} #{verification}")
+        raise "Failed to change group for verification" unless system("sudo chgrp #{BS::Config::BS_UID} #{verification}")
         raise "Failed to chmod for verification" unless system("sudo chmod 771 #{verification}")
       end
 

@@ -9,7 +9,6 @@ module BS
     CONF_DIR  = "#{OPT_DIR}/config"
     CONF_FILE = "#{CONF_DIR}/bs.yml"
     TASK_DIR  = "#{OPT_DIR}/tasks"
-    #TMP_DIR   = "#{OPT_DIR}/tmp"
     LOG_DIR   = "#{OPT_DIR}/log"
 
     VER_DST_DIR = '/home/sandbox/verification'
@@ -18,6 +17,8 @@ module BS
     DEFAULT_TIME_LIMIT = 30
 
     DESKTOP_SB  = "sb0"
+    BS_UID = 10001
+    SANDBOX_UID = 11111
 
     # subsystems
     C          = 0
