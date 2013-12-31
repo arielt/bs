@@ -92,7 +92,7 @@ end
 
 def start_server
   puts "Starting BS web server...".cyan
-  system("cd webapp && script/server")
+  system("cd webapp && rails s -p 4101")
 end
 
 # entry point
