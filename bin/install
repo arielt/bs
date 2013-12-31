@@ -5,7 +5,7 @@ ccend=$(echo -e "\033[0m")
 
 echo "Installing ruby environment"
 puppet apply --modulepath '/opt/bs/puppet/modules' /opt/bs/puppet/manifests/ruby.pp --detailed-exitcodes
-source $(/usr/local/rvm/bin/rvm 2.0.0-p195@bs do rvm env --path)
+source "/usr/local/rvm/scripts/rvm"
 cd /opt/bs/webapp && rvm use ruby-2.0.0-p195@bs && bundle install
 
 if [ -n $SUDO_USER ]; then
