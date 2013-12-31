@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env /usr/local/rvm/bin/ruby-2.0.0-p195@bs
 
 $:.unshift '/opt/bs/lib'
 require 'bs'
@@ -12,7 +12,7 @@ cli_struct = {
     'list'   => 'BS::Task.list',
     'add'    =>  {'.+' => 'BS::Task.add'},
     'del'    =>  {'.+' => 'BS::Task.del'},
-    'verify' =>  {'.+' => {'.+' => 'BS::Sandbox::Desktop.perform'}}
+    'verify' =>  {'.+' => {'.+' => 'verify'}}
   },
   'server' => 'start_server'
 }
@@ -83,6 +83,11 @@ def parse_arguments struct
   else
     quit_on_wrong_input
   end
+end
+
+def verify(params)
+  enforce_root
+  BS::Sandbox::Desktop.perform(params)
 end
 
 def start_server

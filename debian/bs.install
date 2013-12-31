@@ -1,7 +1,10 @@
 usr/sbin/bs
+opt/bs/bin/install
 opt/bs/lib/
 opt/bs/files/
 opt/bs/tasks/
 opt/bs/config/
-/opt/bs/log/
+opt/bs/log/
+opt/bs/puppet
+opt/bs/webapp
 

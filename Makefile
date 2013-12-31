@@ -12,6 +12,8 @@ clean:
 install:
 	mkdir -p $(INST_BIN_DIR)
 	cp bin/bs $(INST_BIN_DIR)
+	mkdir -p $(INST_OPT_DIR)/bin
+	cp bin/install $(INST_OPT_DIR)/bin/
 
 	mkdir -p $(INST_OPT_DIR)
 	cp -r lib $(INST_OPT_DIR)/
@@ -21,4 +23,7 @@ install:
 	mkdir -p $(INST_OPT_DIR)/config
 	mkdir -p $(INST_OPT_DIR)/log
 	mv $(INST_OPT_DIR)/files/bs.yml $(INST_OPT_DIR)/config
+
+	cp -r puppet $(INST_OPT_DIR)/
+	cp -r webapp $(INST_OPT_DIR)/
 

@@ -106,14 +106,14 @@ module BS
 
       # perform internal configuration with puppet
       def configure(sb_name)
-        puts "BS: updating sandbox repository".green
+        puts "BS: updating sandbox repository".cyan
         rootfs = "/var/lib/lxc/#{sb_name}/rootfs"
         system("sudo /usr/sbin/chroot #{rootfs} /bin/bash -c \"apt-get update\"")
         system("sudo /usr/sbin/chroot #{rootfs} apt-get -q -y install puppet lxc make build-essential libboost-test-dev")
-        puts "BS: configuring sandbox".green
+        puts "BS: configuring sandbox".cyan
         system("sudo cp /opt/bs/files/lxc-insider.pp #{rootfs}/etc/puppet/manifests/lxc-insider.pp")
         system("sudo lxc-execute -n #{sb_name} puppet apply /etc/puppet/manifests/lxc-insider.pp")
-        puts "BS: sandbox configured".green
+        puts "BS: sandbox configured".cyan
       end
 
       # stop monit services and monit itself
@@ -135,14 +135,14 @@ module BS
         name = sb[:name]
         type = sb[:type]
       
-        puts "BS: creating sandbox".green
+        puts "BS: creating sandbox".cyan
         # to optimize, create only first container, clone others
         if name == "sb0"
           system("sudo /usr/bin/lxc-create -n #{name} -t ubuntu -- -r oneiric")
-          puts "BS: sandbox created".green
+          puts "BS: sandbox created".cyan
         else
           system("sudo lxc-clone -o sb0 -n #{name}")
-          puts "BS: sandbox cloned".green
+          puts "BS: sandbox cloned".cyan
         end
 
         set_constraints(sb)

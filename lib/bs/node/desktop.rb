@@ -25,7 +25,7 @@ module BS
       end
 
       def set_constraints(sandbox)
-        puts "BS: setting constraints".green
+        puts "BS: setting constraints".cyan
         lxc = BS::LXC::Container.new(sandbox[:name])
         lxc.set_knob(:mem,  "#{sandbox[:mem]}K")
         lxc.set_knob(:swap, "#{sandbox[:mem]*2}K")
@@ -34,10 +34,10 @@ module BS
         lxc.enable_network
         lxc.save
         configure(sandbox[:name])
-        puts "BS: disabling network".green
+        puts "BS: disabling network".cyan
         lxc.disable_network
         lxc.save
-        puts "BS: done with constraints".green
+        puts "BS: done with constraints".cyan
       end         
 
       def set_sb_conf

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ccyellow=$(echo -e "\033[0;33m")
+ccend=$(echo -e "\033[0m")
+
+echo "Installing ruby environment"
+puppet apply --modulepath '/opt/bs/puppet/modules' /opt/bs/puppet/manifests/ruby.pp --detailed-exitcodes
+source $(/usr/local/rvm/bin/rvm 2.0.0-p195@bs do rvm env --path)
+cd /opt/bs/webapp && rvm use ruby-2.0.0-p195@bs && bundle install
+
+if [ -n $SUDO_USER ]; then
+  echo -e "${ccyellow}Important${ccend}: user ${ccyellow} $SUDO_USER ${ccend} will be the owner of application"
+  chown -R $SUDO_USER /opt/bs
+fi
+
