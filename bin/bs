@@ -13,8 +13,17 @@ cli_struct = {
     'add'    =>  {'.+' => 'BS::Task.add'},
     'del'    =>  {'.+' => 'BS::Task.del'},
     'verify' =>  {'.+' => {'.+' => 'BS::Sandbox::Desktop.perform'}}
-  }
+  },
+  'server' => 'start_server'
 }
+
+
+def enforce_root
+  unless Process.uid == 0
+    puts "This process must run as root. You might want to use \'sudo bs ...\'".red
+    exit 1
+  end
+end
 
 def print_usage
   puts 'Usage:'
@@ -26,6 +35,8 @@ def print_usage
   puts '  bs task add <git URL>'
   puts '  bs task del <task name>'
   puts '  bs task verify <task name> <solution file>'
+  puts ''
+  puts '  bs server'
 end
 
 def quit_on_wrong_input
@@ -41,11 +52,13 @@ def status
 end
 
 def make
+  enforce_root
   node = BS::Node::Desktop.new
   node.create
 end
 
 def clean
+   enforce_root
    BS::Node::Desktop.new.destroy
 end
 
@@ -72,13 +85,12 @@ def parse_arguments struct
   end
 end
 
-
-# entry point
-unless Process.uid == 0
-  puts "This process must run as root. You might want to use \'sudo bs ...\'".red
-  exit 1
+def start_server
+  puts "Starting BS web server...".cyan
+  system("cd webapp && script/server")
 end
 
+# entry point
 if ARGV.empty?
   print_usage
 else

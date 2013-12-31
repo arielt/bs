@@ -72,6 +72,7 @@ nofile       | max number of open files | https://github.com/arielt/cpp_hello_wo
 ## TODO
 
 * Add tests
+* Add installer for rails 3
 * remove postinstall ease of permissions
 * add web server
 
