@@ -1,4 +1,5 @@
 .bs
 debian/bs
 debian/tmp
+debian/bs.debhelper.log
 
