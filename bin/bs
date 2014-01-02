@@ -14,7 +14,12 @@ cli_struct = {
     'del'    =>  {'.+' => 'BS::Task.del'},
     'verify' =>  {'.+' => {'.+' => 'verify'}}
   },
-  'server' => 'start_server'
+  'session' => {
+    'status' => 'BS::Session.status',
+    'make'   => 'session_make',
+    'clean'  => 'session_clean',
+    'resume' => 'session_resume'
+  }
 }
 
 
@@ -36,7 +41,10 @@ def print_usage
   puts '  bs task del <task name>'
   puts '  bs task verify <task name> <solution file>'
   puts ''
-  puts '  bs server'
+  puts '  bs session status'
+  puts '  bs session make <task name>'
+  puts '  bs session clean'
+  puts '  bs session resume'
 end
 
 def quit_on_wrong_input
@@ -49,6 +57,8 @@ def status
   BS::Node::Desktop.new.print_status
   puts ''
   BS::Task.list
+  puts ''
+  BS::Session.status
 end
 
 def make
@@ -76,7 +86,8 @@ def parse_arguments struct
 
   if struct 
     if params.count == 0
-       eval struct
+      quit_on_wrong_input if struct.class != String
+      eval struct
     else
       eval "#{struct} params"
     end

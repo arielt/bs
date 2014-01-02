@@ -4,5 +4,6 @@ module BS
   autoload :Task,        'bs/task'
   autoload :Node,        'bs/node'
   autoload :Sandbox,     'bs/sandbox'
+  autoload :Session,     'bs/session'
 end
 
