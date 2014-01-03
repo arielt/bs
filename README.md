@@ -19,7 +19,7 @@ Merging code from old sources to github, functionality is not available yet.
 
 Check out on Ubuntu machine, build and install BS package:
 
-    git clone --recursive <BS URL>
+    git clone --recursive <BS GIT URL>
     cd bs
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb

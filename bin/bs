@@ -16,9 +16,9 @@ cli_struct = {
   },
   'session' => {
     'status' => 'BS::Session.status',
-    'make'   => 'session_make',
-    'clean'  => 'session_clean',
-    'resume' => 'session_resume'
+    'make'   => {'.+' => 'BS::Session.make'},
+    'clean'  => 'BS::Session.clean',
+    'resume' => 'BS::Session.resume'
   }
 }
 
