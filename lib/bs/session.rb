@@ -41,13 +41,14 @@ module BS
     def create
     end
 
-    def launch
+    def resume
+       system("cd webapp && rails s -p 4101")
     end
 
-    def make(task_name)
+    def make(params)
       FileUtils.mkdir_p(SESSION_DIR)
-      config = {
-        'task'        => task_name,
+      @config = {
+        'task'        => params[0],
         'created_at'  => Time.now,
         'accepted_at' => nil,
         'deadline'    => nil,
@@ -64,8 +65,14 @@ module BS
 
     def objective
       load_config
-      task_path = "/opt/bs/tasks/#{@config['task']}"
+      File.read( "/opt/bs/tasks/#{@config['task']}/objective.md")
+    end
+
+    def accepted_at
+      load_config
+      @config["accepted_at"]
     end
 
   end
 end
+

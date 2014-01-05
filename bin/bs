@@ -1,6 +1,6 @@
 #!/usr/bin/env /usr/local/rvm/bin/ruby-2.0.0-p195@bs
 
-$:.unshift '/opt/bs/lib'
+$:.unshift '/home/void/bs/lib'
 require 'bs'
 require 'bs/helpers'
 
