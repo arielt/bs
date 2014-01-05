@@ -1,4 +1,7 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+//=require bootstrap.2.3.0.css
+//=require style.less
+
+.ace_scroller {
+  background-color: #FFFFFF;
+}
+
