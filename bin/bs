@@ -15,10 +15,10 @@ cli_struct = {
     'verify' =>  {'.+' => {'.+' => 'verify'}}
   },
   'session' => {
-    'status' => 'BS::Session.status',
-    'make'   => {'.+' => 'BS::Session.make'},
-    'clean'  => 'BS::Session.clean',
-    'resume' => 'BS::Session.resume'
+    'status' => 'BS::Session.new.status',
+    'make'   => {'.+' => 'BS::Session.new.make'},
+    'clean'  => 'BS::Session.new.clean',
+    'resume' => 'BS::Session.new.resume'
   }
 }
 
@@ -58,7 +58,7 @@ def status
   puts ''
   BS::Task.list
   puts ''
-  BS::Session.status
+  BS::Session.new.status
 end
 
 def make

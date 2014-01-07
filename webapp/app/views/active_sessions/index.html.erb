@@ -146,7 +146,7 @@
         activate_tabs();
 
         // start countdown timer
-        countdown_value = 150;
+        countdown_value = <%= @current_session.countdown %>;
         countdown_timer = setInterval(countdown_callback, 1000);
 
         // verify button click handler

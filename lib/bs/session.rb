@@ -2,37 +2,44 @@ require 'yaml'
 require 'fileutils'
 
 module BS
-  module Session
+  class Session
 
     SESSION_DIR  = '/opt/bs/session/'
     SESSION_FILE = "#{SESSION_DIR}config"
 
-    # this config is not cached
     @config = nil
 
-    extend self
-
-    def status
-      puts 'Session:'
-      load_config
-      if @config
-      else
-        puts "  Not created"
-      end
+    def is_created
+      File.exists?(SESSION_FILE)
     end
 
     def load_config
-      unless File.exists?(SESSION_FILE)
+      if is_created()
+         @config = YAML::load_file(SESSION_FILE)
+      else
         @config = nil
-        return @config
       end
-      @config = YAML::load_file(SESSION_FILE)
     end
 
     def save_config
       file = File.open(SESSION_FILE, 'w')
       YAML.dump(@config, file)
       file.close
+    end
+
+    def status
+      puts 'Session:'
+      if is_created()
+        load_config
+        puts "  Task: \t#{@config['task']}"
+        if @config['accepted_at']
+          puts "  Accepted, deadline is #{@config['deadline']}"
+        else
+          puts "  Not accepted yet"
+        end
+      else
+        puts '  Not created'
+      end
     end
 
     def check
@@ -64,13 +71,23 @@ module BS
     end
 
     def objective
-      load_config
       File.read( "/opt/bs/tasks/#{@config['task']}/objective.md")
     end
 
-    def accepted_at
+    def accept
+      unless @config['accepted_at']
+        @config['accepted_at'] = Time.now
+        @config['deadline'] = @config['accepted_at'] + BS::Task.params(@config['task'])['time_limit'] * 60
+        save_config
+      end
+    end
+
+    def countdown
+      (@config['deadline'] - Time.now).to_i
+    end
+
+    def initialize
       load_config
-      @config["accepted_at"]
     end
 
   end

@@ -6,11 +6,19 @@ class ActiveSessionsController < ApplicationController
     :autolink => true, :space_after_headers => true, :no_intra_emphasis => true
   }
 
+  @current_session = nil
+
+  before_filter :set_session
+
+  def set_session
+    @current_session = BS::Session.new unless @current_session
+    @current_session.accept
+  end
+
+
   def index
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, RENDERING_OPT)
-    @rendered_md = @markdown.render(BS::Session.objective)
-    @session_config = BS::Session.load_config
-    @is_accepted = @session_config["is_accepted"]
+    @rendered_md = @markdown.render(@current_session.objective)
   end
 
 
