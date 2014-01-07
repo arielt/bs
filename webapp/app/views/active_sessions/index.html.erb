@@ -5,7 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <meta name="viewport" content="width=device-width" />
-    <title>Style Guide</title>  
 
     <%= stylesheet_link_tag("active_sessions") %>
 
@@ -31,26 +30,27 @@
           <div class="span3">
             <%= link_to(image_tag("logo.png", :id => "logo", :alt => "Binary Score"), "/")%>
           </div>
-            <div class="span4 info">
-              <div id="tb-status" class="status" style="width: 140px;">
-                <%= image_tag "icons/flag.png", :class => "icon", :alt => "" %>
-                <p>Status: <span class="succeed" id="status_p">NEW</span></p>
-              </div>
-              <div id="tb-divider" class="divider"></div>
-              <div id="tb-timer" class="time" style="width: 200px;">
-                <%= image_tag "icons/time.png", :class => "icon", :alt => "" %>
-                <p id="ct"></p>
-              </div>
 
-              <div class="progress progress-striped active" id="pg-verify" style="display:none;">
-                <div class="bar" style="width: 40%;" id="pgb-verify"></div>
-              </div>
+          <div class="span4 info">
+            <div id="tb-status" class="status" style="width: 140px;">
+              <%= image_tag "icons/flag.png", :class => "icon", :alt => "" %>
+              <p>Status: <span class="succeed" id="status_p">NEW</span></p>
+            </div>
+            <div id="tb-divider" class="divider"></div>
+            <div id="tb-timer" class="time" style="width: 200px;">
+              <%= image_tag "icons/time.png", :class => "icon", :alt => "" %>
+              <p id="ct"></p>
+            </div>
 
+            <div class="progress progress-striped active" id="pg-verify" style="display:none;">
+              <div class="bar" style="width: 40%;" id="pgb-verify"></div>
             </div>
-            <div class="span5 top-buttons">    
-              <a href="#submit-window" id="btn-submit" class="submit button" data-toggle="modal" style="float: right; margin-right: 0px;"><span>Submit</span></a>
-              <a href="#are-you-sure" role="button" class="verify button" data-toggle="modal" style="float: right" id="btnx-verify"><span>Verify</span></a>
-            </div>
+          </div>
+
+          <div class="span5 top-buttons">    
+            <a href="#submit-window" id="btn-submit" role="button" class="submit button" data-toggle="modal" style="float: right;"><span>Submit</span></a>
+            <a role="button" class="verify button" data-toggle="modal" style="float: right;" id="btn-verify"><span>Verify</span></a>
+          </div>
 
         </div>
       </div>
@@ -72,22 +72,6 @@
                 <p>Objectives</p>
               </div>
               <div class="objective-body">
-
-                <!--
-                <h2>C/C++ Hello World</h2>
-
-                <p>This is an example of the task, already created and assigned to you. You can experience, what does it feel to deal with the real task on real engine while the time is limited.</p>
-                <p>You should print out a single line:</p>
-                <code>Hello world!</code>
-
-                <p>Implement your solution in PrintHelloWorld function:</p>
-                <code>void PrintHelloWorld()<br /> 
-                  {<br />
-                  //Your implementation goes here<br /> 
-                  }
-                </code>
-                <p>Just to emphasize - the time is limited to 15 minutes.</p>
-                -->
                 <%= @rendered_md.html_safe %> 
               </div>
             </div>
@@ -97,18 +81,10 @@
                   <p>solution.cpp</p>
                 </div>
                 <div id="editor">
-void PrintHelloWorld()
-{
-    //Your implementation goes here
-}</div>
+                </div>
               </div>
             </div>
             <div class="tab-pane" id="issues">
-              <!--
-              <div class="progress progress-striped active">
-                <div class="bar" style="width: 40%;"></div>
-              </div>
-              -->
               <div class="editor-header">
                 <p>Issues</p>
               </div>
@@ -117,18 +93,6 @@ void PrintHelloWorld()
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Modal sign up -->
-    <div id="are-you-sure" class="modal hide fade modal-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="/assets/close-modal.png"></button>
-        <h3 id="myModalLabel">Ain't it awesome!</h3>
-      </div>
-
-      <div class="modal-body">
-        <p>If you think it's awesome, let us verify your solution by registering yourself.</p>
       </div>
     </div>
 
@@ -152,19 +116,19 @@ void PrintHelloWorld()
     <!-- Modal time over -->
     <div id="time-window" class="modal hide fade modal-window" tabindex="-1" role="dialog" aria-labelledby="timeModalLabel" aria-hidden="true">
       <div class="modal-header">
-        <button href="/" type="button" class="close" aria-hidden="true"><img src="/assets/close-modal.png"></button>
-        <h3 id="timeModalLabel">Time us up!</h3>
+        <button href="/active_sessions" type="button" class="close" aria-hidden="true"><img src="/assets/close-modal.png"></button>
+        <h3 id="timeModalLabel">That's it...</h3>
       </div>
 
       <div class="modal-body">
-        <p id="time-msg">=== stub ===</p>
+        <p id="time-msg">Time is up!</p>
       </div>
 
       <div class="modal-footer" style="margin-left: auto; margin-right:auto; width: 80px;">
-        <a href="/" class="green button no-border">OK</a>
+        <a href="/active_sessions" class="green button no-border">OK</a>
       </div>
     </div>
-    
+
     <!-- Scripts -->
     <%= javascript_include_tag("active_sessions") %>
     <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
