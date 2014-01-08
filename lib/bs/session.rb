@@ -42,12 +42,6 @@ module BS
       end
     end
 
-    def check
-    end
-
-    def create
-    end
-
     def resume
        system("cd webapp && rails s -p 4101")
     end
@@ -84,6 +78,10 @@ module BS
 
     def countdown
       (@config['deadline'] - Time.now).to_i
+    end
+
+    def config
+      @config
     end
 
     def initialize

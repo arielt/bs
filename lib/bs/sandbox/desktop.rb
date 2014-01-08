@@ -55,8 +55,6 @@ module BS
             system("sudo kill -9 #{init_pid} 2> /dev/null")
           end
 
-          unlock()
-
           puts message
 
           if rv

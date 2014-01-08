@@ -100,6 +100,7 @@ def verify(params)
   enforce_root
   if BS::Sandbox::Desktop.lock()
     BS::Sandbox::Desktop.perform(params)
+    BS::Sandbox::Desktop.unlock()
   else
     puts "Busy, try again later" . red
   end

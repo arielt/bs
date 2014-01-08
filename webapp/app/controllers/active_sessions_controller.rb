@@ -2,6 +2,13 @@ require 'bs'
 
 class ActiveSessionsController < ApplicationController
 
+  # verification status
+  STATUS_OK       = 0
+  STATUS_NOK      = 1
+  STATUS_BUSY     = 2
+  STATUS_NEW      = 3
+  STATUS_ERR      = 4
+
   RENDERING_OPT = {
     :autolink => true, :space_after_headers => true, :no_intra_emphasis => true
   }
@@ -25,52 +32,54 @@ class ActiveSessionsController < ApplicationController
   # Ajax POST call
   def create
     # lock the session
-    return respond_to {|format| format.json {render :json => {status: STATUS_BUSY}}} unless @current_session.lock()
+    puts "LOCK"
+    return respond_to {|format| format.json {render :json => {status: STATUS_BUSY}}} unless BS::Sandbox::Desktop.lock()
+
+    puts "GOING FORWARD"
 
     # sumbit solution
     if params["submit"] == "TRUE" then
-      @current_session.is_active     = FALSE;
-      @current_session.finished_at   = Time.now;
-      @current_session.forced_finish = FALSE;
-      @current_session.save
-      @current_session.unlock()
+      puts "SUBMIT"
+      config = @current_session.load_config
+      config['is_active']     = false;
+      config['finished_at']   = Time.now;
+      config['forced_finish'] = FALSE;
+      @current_session.save_config
+      BS::Sandbox::Desktop.unlock()
       return respond_to {|format| format.json {render :json => {status: STATUS_OK}}} 
     end
-    
+   
+    puts "GOING FORWARD" 
     # calculate digest
     request_digest = Digest::MD5.hexdigest(params["check"].to_s)
 
     # return saved state if there is no change in code
-    if request_digest == @current_session.verified_digest
+    if request_digest == @current_session.config['verified_digest']
       parse_message()
       
       # if there was a timeout - allow to verify once again
-      if @current_session.verified_message.include?("[--bs--]:Oops... We've been waiting for too long")
-        @current_session.verified_digest = nil
+      if @current_session.config['verified_message'].include?("[--bs--]:Oops... We've been waiting for too long")
+        @current_session.config['verified_digest'] = nil
       end
 
-      @current_session.response = {
-        status:   @current_session.verified_status, 
-        issues:   JSON.parse(@current_session.verified_issues),
-        solution: @current_session.vr_solution
+      @current_session.config['response'] = {
+        status:   @current_session.config['verified_status'], 
+        issues:   JSON.parse(@current_session.config['verified_issues']),
+        solution: @current_session.config['vr_solution']
       }.to_json
-      @current_session.save
+      @current_session.save_config
  
-      @current_session.unlock()
-      return respond_to {|format| format.json {render :json => @current_session.response}}
+      BS::Sandbox::Desktop.unlock()
+      return respond_to {|format| format.json {render :json => @current_session.config['response']}}
     end
 
     # start the verification
-    params_hash = {
-      user_test_id: @current_session.user_test_id,
-      solution: params["check"],
-      digest: request_digest,
-      session_id: @current_session.id
-    }
-    Resque.enqueue(Sandbox::First, params_hash)
+    file = File.open('/opt/bs/session/solution.cpp', 'w')
+    file << params['check']
+    file.close
 
-    @current_session.vr_solution = params["check"];
-    @current_session.save!;
+    params = [@current_session.config['task'], '/opt/bs/session/solution.cpp']
+    BS::Sandbox::Desktop.perform(params)
 
     respond_to {|format| format.json { render :json => {status: STATUS_BUSY}}}
   end
