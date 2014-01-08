@@ -98,7 +98,11 @@ end
 
 def verify(params)
   enforce_root
-  BS::Sandbox::Desktop.perform(params)
+  if BS::Sandbox::Desktop.lock()
+    BS::Sandbox::Desktop.perform(params)
+  else
+    puts "Busy, try again later" . red
+  end
 end
 
 def start_server

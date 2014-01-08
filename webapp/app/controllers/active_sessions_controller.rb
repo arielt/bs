@@ -25,7 +25,7 @@ class ActiveSessionsController < ApplicationController
   # Ajax POST call
   def create
     # lock the session
-    return respond_to {|format| format.json {render :json => {status: STATUS_BUSY}}} unless BS::Session.lock()
+    return respond_to {|format| format.json {render :json => {status: STATUS_BUSY}}} unless @current_session.lock()
 
     # sumbit solution
     if params["submit"] == "TRUE" then
