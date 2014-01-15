@@ -18,15 +18,16 @@ cli_struct = {
     'status' => 'BS::Session.new.status',
     'make'   => {'.+' => 'BS::Session.new.make'},
     'clean'  => 'BS::Session.new.clean',
-    'resume' => 'BS::Session.new.resume'
+    'resume' => 'resume'
   }
 }
 
 
 def enforce_root
   unless Process.uid == 0
-    puts "This process must run as root. You might want to use \'sudo bs ...\'".red
-    exit 1
+    puts "This process must run as root. We'll try to switch to root." . red
+    puts "If it doesn't work, you might want to use \'sudo bs ...\'" . red
+    system("sudo whoami")
   end
 end
 
@@ -106,9 +107,9 @@ def verify(params)
   end
 end
 
-def start_server
-  puts "Starting BS web server...".cyan
-  system("cd webapp && rails s -p 4101")
+def resume
+  enforce_root
+  BS::Session.new.resume
 end
 
 # entry point

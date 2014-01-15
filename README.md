@@ -40,6 +40,16 @@ Run verification process, using sample file provided with the task:
 
     bs task verify cpp_hello_world /opt/bs/tasks/cpp_hello_world/solutions/solution.cpp
 
+To create interactive session, run:
+    
+    bs session make cpp_hello_world
+
+To start web server, run:
+
+    bs session resume 
+
+Now you can use the address http://YourIP:4101 to access the session
+
 ## Troubleshooting
 
 To rebuild the environment and sandbox, use:
