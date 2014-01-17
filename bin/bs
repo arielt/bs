@@ -25,9 +25,8 @@ cli_struct = {
 
 def enforce_root
   unless Process.uid == 0
-    puts "This process must run as root. We'll try to switch to root." . red
-    puts "If it doesn't work, you might want to use \'sudo bs ...\'" . red
-    system("sudo whoami")
+    puts "Root privileges are required" . red
+    exit(-1)
   end
 end
 
