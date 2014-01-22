@@ -7,6 +7,6 @@ Standards-Version: 1.0.0
 
 Package: bs
 Architecture: all
-Depends: lxc, puppet
+Pre-Depends: lxc, puppet
 Description: Binary Score Core
 
