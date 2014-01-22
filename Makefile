@@ -13,7 +13,7 @@ install:
 	mkdir -p $(INST_BIN_DIR)
 	cp bin/bs $(INST_BIN_DIR)
 	mkdir -p $(INST_OPT_DIR)/bin
-	cp bin/install $(INST_OPT_DIR)/bin/
+	cp bin/configure $(INST_OPT_DIR)/bin/
 
 	mkdir -p $(INST_OPT_DIR)
 	cp -r lib $(INST_OPT_DIR)/
