@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$:.unshift '/home/atubaltsev/bs/lib'
+$:.unshift '/opt/bs/lib'
 require 'bs'
 require 'bs/helpers'
 
