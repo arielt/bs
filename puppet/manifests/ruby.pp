@@ -9,7 +9,6 @@ $gemset     = "${ruby}@${app}"
 
 rvm::system_user { 
     root: ; 
-    void: ;
 }
 
 # system user for backward compatibility

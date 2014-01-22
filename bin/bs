@@ -1,6 +1,6 @@
-#!/usr/bin/env /usr/local/rvm/bin/ruby-2.0.0-p195@bs
+#!/usr/bin/env ruby
 
-$:.unshift '/home/void/bs/lib'
+$:.unshift '/opt/bs/lib'
 require 'bs'
 require 'bs/helpers'
 
@@ -10,15 +10,15 @@ cli_struct = {
   'clean'  => 'clean',
   'task' => {
     'list'   => 'BS::Task.list',
-    'add'    =>  {'.+' => 'BS::Task.add'},
-    'del'    =>  {'.+' => 'BS::Task.del'},
+    'add'    =>  {'.+' => 'task_add'},
+    'del'    =>  {'.+' => 'task_del'},
     'verify' =>  {'.+' => {'.+' => 'verify'}}
   },
   'session' => {
     'status' => 'BS::Session.new.status',
-    'make'   => {'.+' => 'BS::Session.new.make'},
-    'clean'  => 'BS::Session.new.clean',
-    'resume' => 'resume'
+    'make'   => {'.+' => 'session_make'},
+    'clean'  => 'session_clean',
+    'server' => 'session_server'
   }
 }
 
@@ -44,7 +44,7 @@ def print_usage
   puts '  bs session status'
   puts '  bs session make <task name>'
   puts '  bs session clean'
-  puts '  bs session resume'
+  puts '  bs session server'
 end
 
 def quit_on_wrong_input
@@ -106,9 +106,29 @@ def verify(params)
   end
 end
 
-def resume
+def session_server
   enforce_root
   BS::Session.new.resume
+end
+
+def task_add(args)
+  enforce_root
+  BS::Task.add(args)
+end
+
+def task_del
+  enforce_root
+  BS::Task.del
+end
+
+def session_make(args)
+  enforce_root
+  BS::Session.new.make(args)
+end
+
+def session_clean
+  enforce_root
+  BS::Session.new.clean
 end
 
 # entry point

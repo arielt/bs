@@ -17,13 +17,17 @@ Merging code from old sources to github, functionality is not available yet.
 
 ## Quick Start
 
-Check out on Ubuntu machine, build and install BS package:
+You will need Ubuntu machine and user with sudo priveleges.
+Compile and install the package::
 
     git clone --recursive <BS GIT URL>
     cd bs
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb
-    /opt/bs/bin/install
+
+Configure the application. It will instal RVM and ruby 2.0.0 for the root user:
+
+    /opt/bs/bin/configure
 
 Prepare sandbox:
 
