@@ -23,6 +23,7 @@ Check out on Ubuntu machine, build and install BS package:
     cd bs
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb
+    /opt/bs/bin/install
 
 Prepare sandbox:
 
@@ -81,10 +82,7 @@ nofile       | max number of open files | https://github.com/arielt/cpp_hello_wo
 
 ## TODO
 
-* Add tests
-* Add installer for rails 3
-* remove postinstall ease of permissions
-* add web server
+* add current user to puppet rvm script
 
 ## License
 
