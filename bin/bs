@@ -30,6 +30,13 @@ def enforce_root
   end
 end
 
+def enforce_not_root
+  if Process.uid == 0
+    puts "It's better not to be root" . red
+    exit(-1)
+  end
+end
+
 def print_usage
   puts 'Usage:'
   puts '  bs status'
@@ -106,11 +113,6 @@ def verify(params)
   end
 end
 
-def session_server
-  enforce_root
-  BS::Session.new.resume
-end
-
 def task_add(args)
   enforce_root
   BS::Task.add(args)
@@ -129,6 +131,11 @@ end
 def session_clean
   enforce_root
   BS::Session.new.clean
+end
+
+def session_server
+  enforce_not_root
+  BS::Session.new.resume
 end
 
 # entry point

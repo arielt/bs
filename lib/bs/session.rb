@@ -43,7 +43,7 @@ module BS
     end
 
     def resume
-       system("cd webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
+       system("cd /opt/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
     end
 
     def make(params)

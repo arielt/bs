@@ -86,7 +86,7 @@ nofile       | max number of open files | https://github.com/arielt/cpp_hello_wo
 
 ## TODO
 
-* add current user to puppet rvm script
+* Do not start server if there is no sandbox or task
 
 ## License
 

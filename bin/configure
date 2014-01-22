@@ -1,10 +1,10 @@
 #!/bin/bash
 
-ccyellow=$(echo -e "\033[0;33m")
+cccolor=$(echo -e "\033[0;31m")
 ccend=$(echo -e "\033[0m")
 
 if [[ $EUID -ne 0 ]]; then
-   echo -e "${ccyellow}This script must be run as root${ccend}" 1>&2
+   echo -e "${cccolor}This script must be run as root${ccend}" 1>&2
    exit 1
 fi
 
