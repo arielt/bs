@@ -9,12 +9,12 @@ module BS
 
     @config = nil
 
-    def is_created
+    def exists?
       File.exists?(SESSION_FILE)
     end
 
     def load_config
-      if is_created()
+      if exists?
          @config = YAML::load_file(SESSION_FILE)
       else
         @config = nil
@@ -29,7 +29,7 @@ module BS
 
     def status
       puts 'Session:'
-      if is_created()
+      if exists?
         load_config
         puts "  Task: \t#{@config['task']}"
         if @config['accepted_at']

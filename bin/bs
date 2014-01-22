@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$:.unshift '/opt/bs/lib'
+$:.unshift '/home/atubaltsev/bs/lib'
 require 'bs'
 require 'bs/helpers'
 
@@ -125,6 +125,10 @@ end
 
 def session_make(args)
   enforce_root
+  unless BS::Task.exists?(args[0])
+    puts "Task #{args[0]} doesn't exist".red
+    exit(-1)
+  end
   BS::Session.new.make(args)
 end
 
@@ -140,7 +144,13 @@ def session_server
     node.print_err 
     exit(-1)
   end
-  BS::Session.new.resume
+
+  session = BS::Session.new
+  unless session.exists?
+    puts "You need to create session first".red
+    exit(-1)
+  end
+  session.resume
 end
 
 # entry point

@@ -86,8 +86,7 @@ nofile       | max number of open files | https://github.com/arielt/cpp_hello_wo
 
 ## TODO
 
-* Do not start server if there is no task
-* Do not start server if there is no session
+* stabilize web gui
 
 ## License
 

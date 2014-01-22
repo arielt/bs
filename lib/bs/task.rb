@@ -10,6 +10,10 @@ module BS
       puts "-------------------------------------"
     end
 
+    def exists?(task_name)
+      File.exists?("#{BS::Config::TASK_DIR}/#{task_name}")
+    end
+
     def add(params)
       system("cd  #{BS::Config::TASK_DIR} && git clone #{params[0]}")
     end
