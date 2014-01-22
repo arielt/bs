@@ -11,16 +11,30 @@ module BS
 
       CONF_FILE = "#{BS::Config::CONF_DIR}/node.yml"
 
-      def print_status
-        puts "\nSandbox:"
-        if File.exists?(CONF_FILE)
+      def exists?
+        File.exists?(CONF_FILE)
+      end
+
+      def print_stats
+          puts "\nSandbox:"
           puts "Memory limit: \t\t\t#{@conf[:sandboxes][0][:mem]} Kb"
           puts "Swap limit: \t\t\t#{@conf[:sandboxes][0][:mem]*2} Kb"
           puts "Disk space limit: \t\t#{@conf[:sandboxes][0][:hd]} Kb"
           puts "Max number of processes: \t#{BS::Config.params['sandbox']['nproc']}"
           puts "Max number of open files: \t#{BS::Config.params['sandbox']['nofile']}"
+      end
+
+      def print_err
+        puts "\nSandbox:".red
+        puts "Not created. You may want to run \'sudo bs make\' to fix that".red
+      end
+
+      def print_status
+        puts "\nSandbox:"
+        if exists?
+          print_stats
         else
-          puts "Not created. You may want to run \'sudo bs make\' to fix that".red
+          print_err
         end
       end
 

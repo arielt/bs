@@ -56,7 +56,7 @@ end
 
 def quit_on_wrong_input
   print_usage
-  exit(1)
+  exit(-1)
 end
 
 def status
@@ -135,6 +135,11 @@ end
 
 def session_server
   enforce_not_root
+  node = BS::Node::Desktop.new
+  unless node.exists?
+    node.print_err 
+    exit(-1)
+  end
   BS::Session.new.resume
 end
 
