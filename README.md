@@ -8,7 +8,7 @@ Executed code will be limited by:
  * Memory / Swap
  * Disk Space
  * Number of processes
- * Number of opened files
+ * Number of open files
  * Time
  
 Currently supported languages: C++
