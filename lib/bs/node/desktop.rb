@@ -75,10 +75,12 @@ module BS
 
       # destroy node, no dispatching
       def destroy
-        @conf[:sandboxes].each do |v|
-          destroy_sandbox(v)
+        if exists?
+          @conf[:sandboxes].each do |v|
+            destroy_sandbox(v)
+          end
+          system("rm #{CONF_FILE}")
         end
-        system("rm #{CONF_FILE}")
       end
 
       def initialize
