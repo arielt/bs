@@ -42,10 +42,6 @@ module BS
       end
     end
 
-    def resume
-       system("cd /opt/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
-    end
-
     def make(params)
       FileUtils.mkdir_p(SESSION_DIR)
       @config = {

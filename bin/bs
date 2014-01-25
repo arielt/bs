@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$:.unshift '/opt/bs/lib'
+$:.unshift '/home/atubaltsev/bs/lib'
 require 'bs'
 require 'bs/helpers'
 
@@ -150,7 +150,9 @@ def session_server
     puts "You need to create session first".red
     exit(-1)
   end
-  session.resume
+
+  system("cd /home/atubaltsev/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
+
 end
 
 # entry point

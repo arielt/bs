@@ -36,7 +36,7 @@ module BS
           FileUtils.rm_rf("#{LOG_DIR}/execute")
           FileUtils.cp(params[1], "#{VER_PATH}solution.cpp")
           FileUtils.cp("#{TASK_DIR}/#{params[0]}/verification.cpp", "#{VER_PATH}verification.cpp")
-          FileUtils.cp("files/#{VERIFICATOR[CPP]}", VER_PATH)
+          FileUtils.cp("/opt/bs/files/#{VERIFICATOR[CPP]}", VER_PATH)
 
           puts "Verification started...".green
           rv = false

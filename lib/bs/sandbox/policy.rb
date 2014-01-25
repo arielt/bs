@@ -22,18 +22,18 @@ module BS
 
       # enable resource control inside container
       def enable_rc
-        system("sudo cp files/su #{@rootfs}etc/pam.d/")
+        system("sudo cp /opt/bs/files/su #{@rootfs}etc/pam.d/")
         system("echo \"session    required   pam_limits.so\" | sudo tee -a #{@rootfs}etc/pam.d/su > /dev/null")
       end
 
       # enable resource control inside container
       def disable_rc
-        system("sudo cp files/su #{@rootfs}etc/pam.d/")
+        system("sudo cp /opt/bs/files/su #{@rootfs}etc/pam.d/")
       end
 
       def apply
         enable_rc
-        system("sudo cp files/limits.conf #{@rootfs}etc/security/")
+        system("sudo cp /opt/bs/files/limits.conf #{@rootfs}etc/security/")
         conf_array.each do |v|
           system("echo \"#{v}\" | sudo tee -a #{@rootfs}etc/security/limits.conf > /dev/null")
         end

@@ -49,7 +49,7 @@ class ActiveSessionsController < ApplicationController
       return respond_to {|format| format.json {render :json => {status: STATUS_OK}}} 
     end
    
-    puts "GOING FORWARD" 
+    puts "GOING DIGEST" 
     # calculate digest
     request_digest = Digest::MD5.hexdigest(params["check"].to_s)
 
