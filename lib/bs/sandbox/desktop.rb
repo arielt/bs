@@ -11,58 +11,66 @@ module BS
   module Sandbox
     module Desktop
 
-        ROOTFS = "/var/lib/lxc/#{DESKTOP_SB}/rootfs/"
-        VER_PATH = ROOTFS + "#{VER_DST_DIR}/"
-        LOCK_FILE = "/var/lib/lxc/#{DESKTOP_SB}/.lock"
+      # verification status
+      STATUS_OK       = 0
+      STATUS_NOK      = 1
 
-        extend self
 
-        def lock()
-          return false if File.exists?(LOCK_FILE)
-          FileUtils.touch(LOCK_FILE)
-          return true
-        end
+      SYSTEM_STATUS = {
+        true  => STATUS_OK,
+        false => STATUS_NOK 
+      }
 
-        def unlock()
-          FileUtils.rm_rf(LOCK_FILE)
-        end
+      ROOTFS = "/var/lib/lxc/#{DESKTOP_SB}/rootfs/"
+      VER_PATH = ROOTFS + "#{VER_DST_DIR}/"
 
-        def perform(params)
-          task_timeout = BS::Task.params(params[0])['verification_timeout'] 
+      extend self
 
-          BS::Sandbox::Policy.new(DESKTOP_SB).apply
+      def perform(task_name, solution_file)
+        task_timeout = BS::Task.params(task_name)['verification_timeout'] 
 
-          FileUtils.rm_rf(VER_PATH + ".")
-          FileUtils.rm_rf("#{LOG_DIR}/execute")
-          FileUtils.cp(params[1], "#{VER_PATH}solution.cpp")
-          FileUtils.cp("#{TASK_DIR}/#{params[0]}/verification.cpp", "#{VER_PATH}verification.cpp")
-          FileUtils.cp("/opt/bs/files/#{VERIFICATOR[CPP]}", VER_PATH)
+        BS::Sandbox::Policy.new(DESKTOP_SB).apply
 
-          puts "Verification started...".green
-          rv = false
-          begin
-            Timeout.timeout(task_timeout || DEFAULT_TIME_LIMIT) do
-              command = "sudo lxc-execute -n #{DESKTOP_SB} -o #{LOG_DIR}/execute -l NOTICE #{VER_DST_DIR}/#{VERIFICATOR[CPP]}" 
-              rv = system(command)
-            end
-            system("tail -n 25 #{VER_PATH}log.txt > #{VER_PATH}trunc_log.txt")
-            message = File.read("#{VER_PATH}trunc_log.txt")            
-          rescue Timeout::Error
-            message =  "Oops... It takes too long, we can't verify this"
-            system("sudo lxc-stop -n #{DESKTOP_SB} &")
-            sleep(1)
-            init_pid = fetch_init_pid("#{LOG_DIR}/execute", DESKTOP_SB)
-            system("sudo kill -9 #{init_pid} 2> /dev/null")
+        FileUtils.rm_rf(VER_PATH + ".")
+        FileUtils.rm_rf("#{LOG_DIR}/execute")
+        FileUtils.cp(solution_file, "#{VER_PATH}solution.cpp")
+        FileUtils.cp("#{TASK_DIR}/#{task_name}/verification.cpp", "#{VER_PATH}verification.cpp")
+        FileUtils.cp("/opt/bs/files/#{VERIFICATOR[CPP]}", VER_PATH)
+
+        puts "Verification started...".green
+        rv = false
+        begin
+          Timeout.timeout(task_timeout || DEFAULT_TIME_LIMIT) do
+            command = "sudo lxc-execute -n #{DESKTOP_SB} -o #{LOG_DIR}/execute -l NOTICE #{VER_DST_DIR}/#{VERIFICATOR[CPP]}" 
+            rv = system(command)
           end
-
-          puts message
-
-          if rv
-            puts "Success".green
-          else
-            puts "Failure".red
-          end
+          system("tail -n 25 #{VER_PATH}log.txt > #{VER_PATH}trunc_log.txt")
+          message = File.read("#{VER_PATH}trunc_log.txt")            
+        rescue Timeout::Error
+          message =  "Oops... It takes too long, we can't verify this"
+          system("sudo lxc-stop -n #{DESKTOP_SB} &")
+          sleep(1)
+          init_pid = fetch_init_pid("#{LOG_DIR}/execute", DESKTOP_SB)
+          system("sudo kill -9 #{init_pid} 2> /dev/null")
         end
+
+        puts message
+
+        if rv
+          puts "Success".green
+        else
+          puts "Failure".red
+        end
+
+        # under the session lock
+        session = BS::Session.new
+        session.config['verified_digest']   = session.config['request_digest']
+        session.config['verified_status']   = SYSTEM_STATUS[rv]
+        session.config['verified_message']  = message
+        session.save_config
+
+        session.unlock()
+      end
 
 
     end

@@ -6,6 +6,7 @@ module BS
 
     SESSION_DIR  = '/opt/bs/session/'
     SESSION_FILE = "#{SESSION_DIR}config"
+    LOCK_FILE = "/opt/bs/session/.lock"
 
     @config = nil
 
@@ -70,6 +71,16 @@ module BS
         @config['deadline'] = @config['accepted_at'] + BS::Task.params(@config['task'])['time_limit'] * 60
         save_config
       end
+    end
+
+    def lock()
+      return false if File.exists?(LOCK_FILE)
+      FileUtils.touch(LOCK_FILE)
+      return true
+    end
+
+    def unlock()
+      FileUtils.rm_rf(LOCK_FILE)
     end
 
     def countdown
