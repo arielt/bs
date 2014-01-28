@@ -51,7 +51,7 @@ To create interactive session, run:
 
 To start web server, run:
 
-    bs session resume 
+    bs session server 
 
 Now you can use the address http://YourIP:4101 to access the session
 
@@ -84,9 +84,7 @@ disk_space    | disk space limit in kilobytes | https://github.com/arielt/cpp_he
 nproc       | max number of processes | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_fork_bomb.cpp
 nofile       | max number of open files | https://github.com/arielt/cpp_hello_world/blob/master/solutions/solution_multiple_files.cpp
 
-## TODO
 
-* stabilize web gui
 
 ## License
 
