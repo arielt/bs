@@ -55,6 +55,8 @@ To start web server, run:
 
 Now you can use the address http://YourIP:4101 to access the session
 
+![alt text](https://github.com/arielt/bs/blob/master/BS.png "BS Web GUI")
+
 ## Troubleshooting
 
 To rebuild the environment and sandbox, use:
