@@ -107,7 +107,7 @@ end
 
 def verify(params)
   enforce_root
-  BS::Sandbox::Desktop.perform(params[0], params[1])
+  BS::Sandbox::Desktop.perform(params[0], params[1], false)
 end
 
 def task_add(args)

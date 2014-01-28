@@ -26,7 +26,7 @@ module BS
 
       extend self
 
-      def perform(task_name, solution_file)
+      def perform(task_name, solution_file, session=TRUE)
         task_timeout = BS::Task.params(task_name)['verification_timeout'] 
 
         BS::Sandbox::Policy.new(DESKTOP_SB).apply
@@ -62,14 +62,15 @@ module BS
           puts "Failure".red
         end
 
-        # under the session lock
-        session = BS::Session.new
-        session.config['verified_digest']   = session.config['request_digest']
-        session.config['verified_status']   = SYSTEM_STATUS[rv]
-        session.config['verified_message']  = message
-        session.save_config
-
-        session.unlock()
+        if session
+          # under the session lock
+          session = BS::Session.new
+          session.config['verified_digest']   = session.config['request_digest']
+          session.config['verified_status']   = SYSTEM_STATUS[rv]
+          session.config['verified_message']  = message
+          session.save_config
+          session.unlock()
+        end
       end
 
 
