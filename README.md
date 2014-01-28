@@ -15,7 +15,6 @@ Executed code will be limited by:
  
 Currently supported languages: C++
 
-Merging code from old sources to github, functionality is not available yet.
 
 ## Quick Start
 
