@@ -154,7 +154,7 @@ class ActiveSessionsController < ApplicationController
     @current_session.save_config
 
     # schedule for background processing. fork on desktop.
-    system("/opt/bs/bin/bs session verify &")
+    system("bs session verify &")
 
     respond_to {|format| format.json { render :json => {status: STATUS_BUSY}}}
   end

@@ -315,7 +315,7 @@ function submit_solution() {
     },
     timeout: 4000,
     success: function(response) {
-       window.location="/";
+       window.location="/active_sessions";
     },
     error: function(x, t, m) {
     }

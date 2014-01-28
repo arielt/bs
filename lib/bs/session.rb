@@ -72,8 +72,9 @@ module BS
         unless @config['accepted_at']
           @config['accepted_at'] = Time.now        
           @config['deadline'] = @config['accepted_at'] + BS::Task.params(@config['task'])['time_limit'] * 60
+           @config['is_active'] = TRUE
         end
-        if @config['deadline'] > Time.now
+        if @config['deadline'] < Time.now
           @config['is_active'] = FALSE
           @config['forced_finish'] = TRUE
           @config['finished_at'] = Time.now
