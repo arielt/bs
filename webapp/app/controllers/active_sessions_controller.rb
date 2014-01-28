@@ -34,7 +34,9 @@ class ActiveSessionsController < ApplicationController
 
   def set_session
     @current_session = BS::Session.new unless @current_session
-    @current_session.accept
+    @current_session.update
+
+    return render_inactive_session unless @current_session.config['is_active']
   end
 
 
@@ -108,7 +110,7 @@ class ActiveSessionsController < ApplicationController
     # submit solution
     if params["submit"] == "TRUE" then
       config = @current_session.load_config
-      config['is_active']     = false;
+      config['is_active']     = FALSE;
       config['finished_at']   = Time.now;
       config['forced_finish'] = FALSE;
       @current_session.save_config
@@ -134,7 +136,7 @@ class ActiveSessionsController < ApplicationController
       @current_session.config['response'] = {
         status:   @current_session.config['verified_status'], 
         issues:   JSON.parse(@current_session.config['verified_issues']),
-        solution: @current_session.config['vr_solution']
+        solution: @current_session.config['solution']
       }.to_json
       @current_session.save_config
  
@@ -148,10 +150,11 @@ class ActiveSessionsController < ApplicationController
     file.close
 
     @current_session.config['request_digest'] = request_digest
+    @current_session.config['solution'] = params['check']
     @current_session.save_config
 
     # schedule for background processing. fork on desktop.
-    system("/home/atubaltsev/bs/bin/bs session verify &")
+    system("/opt/bs/bin/bs session verify &")
 
     respond_to {|format| format.json { render :json => {status: STATUS_BUSY}}}
   end

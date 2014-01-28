@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$:.unshift '/home/atubaltsev/bs/lib'
+$:.unshift '/opt/bs/lib'
 require 'bs'
 require 'bs/helpers'
 
@@ -148,7 +148,7 @@ def session_server
     exit(-1)
   end
 
-  system("cd /home/atubaltsev/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
+  system("cd /opt/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
 end
 
 def session_verify

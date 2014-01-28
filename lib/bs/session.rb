@@ -65,10 +65,19 @@ module BS
       File.read( "/opt/bs/tasks/#{@config['task']}/objective.md")
     end
 
-    def accept
+    # accept session
+    # check if times out
+    def update()
       unless @config['accepted_at']
-        @config['accepted_at'] = Time.now
-        @config['deadline'] = @config['accepted_at'] + BS::Task.params(@config['task'])['time_limit'] * 60
+        unless @config['accepted_at']
+          @config['accepted_at'] = Time.now        
+          @config['deadline'] = @config['accepted_at'] + BS::Task.params(@config['task'])['time_limit'] * 60
+        end
+        if @config['deadline'] > Time.now
+          @config['is_active'] = FALSE
+          @config['forced_finish'] = TRUE
+          @config['finished_at'] = Time.now
+        end
         save_config
       end
     end
