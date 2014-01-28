@@ -1,6 +1,8 @@
 BS
 ==
 
+![alt text](https://raw2.github.com/arielt/bs/master/BS.png "BS Web GUI")
+
 Binary Score allows you to execute code verification in sandbox environment. It's available on any Ubuntu machine: bare metal, virtual on-premises or in the cloud. Binary Score protects your resources while executing not trusted code. 
 
 Executed code will be limited by:
@@ -55,7 +57,6 @@ To start web server, run:
 
 Now you can use the address http://YourIP:4101 to access the session
 
-![alt text](https://github.com/arielt/bs/blob/master/BS.png "BS Web GUI")
 
 ## Troubleshooting
 
