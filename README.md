@@ -26,7 +26,7 @@ Compile and install the package::
     dpkg-buildpackage -us -uc
     dpkg -i ../bs_1.0.0_all.deb
 
-Configure the application. It will instal RVM and ruby 2.0.0 for the root user:
+Configure the application. It will instal ruby 2.0.0 and RVM for the root user:
 
     /opt/bs/bin/configure
 
