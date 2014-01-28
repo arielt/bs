@@ -54,7 +54,7 @@ To start web server, run:
 
     bs session server 
 
-Now you can use the address http://YourIP:4101 to access the session
+Now you can use the address http://Your server IP:4101 to access the session
 
 
 ## Troubleshooting
