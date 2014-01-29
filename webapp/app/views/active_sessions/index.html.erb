@@ -163,7 +163,7 @@
 
         window.TOKEN = '<%= @session_id %>';
 
-        viewData = 'response';
+        viewData = <%= @current_session.config['response'].html_safe if @current_session.config['response'] %>
         renderAll();
       });
     </script>
