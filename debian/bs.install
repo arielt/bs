@@ -1,5 +1,6 @@
 usr/sbin/bs
 opt/bs/bin/configure
+opt/bs/bin/server
 opt/bs/lib/
 opt/bs/files/
 opt/bs/tasks/

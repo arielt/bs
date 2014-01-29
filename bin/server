@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source "/usr/local/rvm/scripts/rvm"
+cd /opt/bs/webapp && rvm use ruby-2.0.0-p195@bs && /usr/local/rvm/bin/rvmsudo rails s -p 4101
+

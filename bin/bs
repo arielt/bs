@@ -135,7 +135,6 @@ def session_clean
 end
 
 def session_server
-  enforce_not_root
   node = BS::Node::Desktop.new
   unless node.exists?
     node.print_err 
@@ -148,7 +147,7 @@ def session_server
     exit(-1)
   end
 
-  system("cd /opt/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
+  system("/opt/bs/bin/server")
 end
 
 def session_verify
