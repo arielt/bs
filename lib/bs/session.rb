@@ -1,5 +1,6 @@
 require 'yaml'
 require 'fileutils'
+require 'json'
 
 module BS
   class Session
@@ -51,7 +52,8 @@ module BS
         'accepted_at' => nil,
         'deadline'    => nil,
         'result'      => false,
-        'server_pid'  => nil
+        'server_pid'  => nil,
+        'response'    => {'status' => STATUS_NEW}.to_json
       }
 
       save_config

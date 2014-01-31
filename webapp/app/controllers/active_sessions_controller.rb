@@ -2,13 +2,6 @@ require 'bs'
 
 class ActiveSessionsController < ApplicationController
 
-  # verification status
-  STATUS_OK       = 0
-  STATUS_NOK      = 1
-  STATUS_BUSY     = 2
-  STATUS_NEW      = 3
-  STATUS_ERR      = 4
-
   RENDERING_OPT = {
     :autolink => true, :space_after_headers => true, :no_intra_emphasis => true
   }
@@ -105,7 +98,7 @@ class ActiveSessionsController < ApplicationController
   # Ajax POST call
   def create
     # lock the session
-    return respond_to {|format| format.json {render :json => {status: STATUS_BUSY}}} unless @current_session.lock()
+    return respond_to {|format| format.json {render :json => {status: BS::STATUS_BUSY}}} unless @current_session.lock()
 
     # submit solution
     if params["submit"] == "TRUE" then
@@ -115,7 +108,7 @@ class ActiveSessionsController < ApplicationController
       config['forced_finish'] = FALSE;
       @current_session.save_config
       @current_session.unlock()
-      return respond_to {|format| format.json {render :json => {status: STATUS_OK}}} 
+      return respond_to {|format| format.json {render :json => {status: BS::STATUS_OK}}} 
     end
    
     # calculate digest
@@ -156,7 +149,7 @@ class ActiveSessionsController < ApplicationController
     # schedule for background processing. fork on desktop.
     system("bs session verify &")
 
-    respond_to {|format| format.json { render :json => {status: STATUS_BUSY}}}
+    respond_to {|format| format.json { render :json => {status: BS::STATUS_BUSY}}}
   end
 
 end
