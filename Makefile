@@ -14,7 +14,6 @@ install:
 	cp bin/bs        $(INST_BIN_DIR)
 	mkdir -p         $(INST_OPT_DIR)/bin
 	cp bin/configure $(INST_OPT_DIR)/bin/
-	cp bin/server    $(INST_OPT_DIR)/bin/
 	cp bin/bs.rb     $(INST_OPT_DIR)/bin/
 
 	mkdir -p    $(INST_OPT_DIR)
