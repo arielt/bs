@@ -1,6 +1,5 @@
 usr/sbin/bs
 opt/bs/bin/configure
-opt/bs/bin/server
 opt/bs/bin/bs.rb
 opt/bs/lib/
 opt/bs/files/

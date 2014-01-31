@@ -147,7 +147,7 @@ def session_server
     exit(-1)
   end
 
-  system("/opt/bs/bin/server")
+  system("cd /opt/bs/webapp && /usr/local/rvm/bin/rvmsudo rails s -p 4101")
 end
 
 def session_verify
