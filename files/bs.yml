@@ -1,5 +1,5 @@
 sandbox:
-  memory:     262144
+  memory:     524288
   disk_space: 262144
   nproc:      8
   nofile:     64
