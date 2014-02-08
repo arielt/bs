@@ -74,7 +74,7 @@ To change sandbox resources, edit **/opt/bs/config/bs.yml** and rebuild sandbox:
 Example of /opt/bs/config/bs.yml:
 
     sandbox:
-      memory:     262144
+      memory:     524288
       disk_space: 262144
       nproc:      8
       nofile:     64
