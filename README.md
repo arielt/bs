@@ -1,4 +1,4 @@
-BS
+Binary Score
 ==
 
 ![alt tag](https://raw.githubusercontent.com/arielt/bs/master/BS.png)
