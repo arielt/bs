@@ -1,8 +1,6 @@
 BS
 ==
 
-![alt text](https://raw2.github.com/arielt/bs/master/BS.png "BS Web GUI")
-
 ![alt tag](https://raw.githubusercontent.com/arielt/bs/master/BS.png)
 
 
